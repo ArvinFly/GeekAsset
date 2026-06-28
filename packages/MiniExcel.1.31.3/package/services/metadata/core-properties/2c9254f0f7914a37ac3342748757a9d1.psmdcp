@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coreProperties xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.openxmlformats.org/package/2006/metadata/core-properties">
+  <dc:creator>LIN,WEI-HAN, Mini-Software team, eynarhaji</dc:creator>
+  <dc:description>Fast, Low-Memory, Easy Excel .NET helper to import/export/template spreadsheet
+Github : https://github.com/mini-software/MiniExcel
+Gitee : https://gitee.com/dotnetchina/MiniExcel
+Issues : https://github.com/mini-software/MiniExcel/issues
+Todo : https://github.com/mini-software/MiniExcel/projects/1?fullscreen=true</dc:description>
+  <dc:identifier>MiniExcel</dc:identifier>
+  <version>1.31.3</version>
+  <keywords>excel xlsx csv micro-helper mini openxml helper</keywords>
+  <lastModifiedBy>NuGet.Build.Tasks.Pack, Version=6.8.0.122, Culture=neutral, PublicKeyToken=31bf3856ad364e35;Microsoft Windows NT 10.0.19045.0;.NET Framework 4.7.2</lastModifiedBy>
+</coreProperties>

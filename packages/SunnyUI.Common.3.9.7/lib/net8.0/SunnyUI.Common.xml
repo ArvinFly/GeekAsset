@@ -1,0 +1,5196 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SunnyUI.Common</name>
+    </assembly>
+    <members>
+        <member name="T:Sunny.UI.ArrayEx">
+            <summary>
+            数组扩展类
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.ArrayEx.DefaultCryptString">
+            <summary>
+            默认加密密码
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.DesEncrypt(System.Byte[],System.String)">
+            <summary>
+            DES加密
+            </summary>
+            <param name="data">待加密数组</param>
+            <param name="key">密钥</param>
+            <returns>加密后的字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.DesDecrypt(System.Byte[],System.String)">
+            <summary>
+            DES解密
+            </summary>
+            <param name="data">待解密数组</param>
+            <param name="key">密钥</param>
+            <returns>解密后的字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.BlockCopy``1(``0[],System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            复制数组的一块
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="array">数组</param>
+            <param name="index">起始索引</param>
+            <param name="length">长度</param>
+            <param name="padToLength">长度不够是否补齐</param>
+            <returns>数组</returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.ZLibCompress(System.Byte[])">
+            <summary>
+            使用System.IO.Compression进行标准ZLib压缩
+            https://stackoverflow.com/questions/9050260/what-does-a-zlib-header-look-like
+             +---+---+
+             |CMF|FLG| (2 bytes - Defines the compression mode - More details below)
+             +---+---+
+             +---+---+---+---+
+             |     DICTID    | (4 bytes.Present only when FLG.FDICT is set.) - Mostly not set
+             +---+---+---+---+
+             +=====================+
+             |...compressed data...| (variable size of data)
+             +=====================+
+             +---+---+---+---+
+             |    ADLER32    |  (4 bytes of checksum)
+             +---+---+---+---+
+              CMF |  FLG
+              0x78 | 0x01 - No Compression/low
+              0x78 | 0x9C - Default Compression
+              0x78 | 0xDA - Best Compression
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.ZLibDecompress(System.Byte[])">
+            <summary>
+            使用System.IO.Compression进行标准ZLib解压
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.Handle(System.Byte[])">
+            <summary>
+            获取数组首地址
+            </summary>
+            <param name="buffer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.Disorder``1(``0[])">
+            <summary>
+            乱序排列一个数组
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.ReadBytes(System.IO.Stream,System.Int64)">
+            <summary>数据流转为字节数组</summary>
+            <remarks>
+            针对MemoryStream进行优化。内存流的Read实现是一个个字节复制，而ToArray是调用内部内存复制方法
+            如果要读完数据，又不支持定位，则采用内存流搬运
+            如果指定长度超过数据流长度，就让其报错，因为那是调用者所期望的值
+            </remarks>
+            <param name="stream">数据流</param>
+            <param name="length">长度，0表示读到结束</param>
+            <returns>字节数组</returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.ToBase64String(System.Byte[])">
+            <summary>
+            字节数组转为Base64编码字符串
+            </summary>
+            <param name="b">字节数组</param>
+            <returns>整形数组</returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.ToBase64Bytes(System.String)">
+            <summary>
+            字节数组转为整形数组
+            </summary>
+            <param name="b">字节数组</param>
+            <returns>整形数组</returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.MedianNum``1(``0[])">
+            <summary>
+            取中值
+            </summary>
+            <param name="array">数组</param>
+            <returns>中值</returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.IsNullOrEmpty(System.Collections.IList)">
+            <summary>
+            检查数组是否为空
+            </summary>
+            <param name = "source">数组</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.IsValid(System.Collections.IList)">
+            <summary>
+            检查数组是否为空
+            </summary>
+            <param name = "source">数组</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.ToHexString(System.Collections.Generic.IEnumerable{System.Byte},System.String)">
+            <summary>
+            字节数组转十六进制字符串
+            </summary>
+            <param name="bytes">字节数组</param>
+            <param name="span">分隔符</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.ToHexString(System.Byte)">
+            <summary>
+            字节转十六进制字符串
+            </summary>
+            <param name="b">字节</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.ToHexBytes(System.String,System.String)">
+            <summary>
+            十六进制字符串转字节数组
+            </summary>
+            <param name="str">十六进制字符串</param>
+            <param name="span">分隔符</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.GZipCompress(System.Byte[])">
+            <summary>
+            压缩字节数组
+            </summary>
+            <param name="inputBytes">数组</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.GZipDecompress(System.Byte[])">
+            <summary>
+            解压缩字节数组
+            </summary>
+            <param name="inputBytes">数组</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.DeflateCompress(System.Byte[])">
+            <summary>
+            Deflate算法压缩字节数组
+            </summary>
+            <param name="inputBytes">数组</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.DeflateDecompress(System.Byte[])">
+            <summary>
+            Deflate算法解压缩字节数组
+            </summary>
+            <param name="inputBytes">数组</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.BubbleSort``1(``0[])">
+            <summary>
+            冒泡排序法
+            </summary>
+            <param name="list">列表</param>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.InsertionSort(System.Int32[])">
+            <summary>
+            插入排序法
+            </summary>
+            <param name="list">列表</param>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.SelectionSort(System.Int32[])">
+            <summary>
+            选择排序法
+            </summary>
+            <param name="list">列表</param>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.ShellSort(System.Int32[])">
+            <summary>
+            希尔排序法
+            </summary>
+            <param name="list">列表</param>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.Swap``1(``0@,``0@)">
+            <summary>
+            赋值交换
+            </summary>
+            <param name="l">l</param>
+            <param name="r">r</param>
+            <typeparam name="T">T</typeparam>
+        </member>
+        <member name="M:Sunny.UI.ArrayEx.QuickSort(System.Int32[],System.Int32,System.Int32)">
+            <summary>
+            快速排序法
+            </summary>
+            <param name="list">列表</param>
+            <param name="low">起始序号</param>
+            <param name="high">结束序号</param>
+        </member>
+        <member name="T:Sunny.UI.AssemblyEx">
+            <summary>
+            反射处理类
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.AssemblyEx.GetCurrentType(System.String)">
+            <summary>
+            根据类名称获取当前进程的类型申明
+            </summary>
+            <param name="typename">类名</param>
+            <returns>类型申明</returns>
+        </member>
+        <member name="M:Sunny.UI.AssemblyEx.GetDllType(System.String,System.String)">
+            <summary>
+            根据类名称获取DLL类型申明
+            </summary>
+            <param name="dll">DLL名称</param>
+            <param name="typename">类名</param>
+            <returns>类型申明</returns>
+        </member>
+        <member name="M:Sunny.UI.AssemblyEx.GetCurrentTypes">
+            <summary>
+            获取当前进程的类型申明数组
+            </summary>
+            <returns>类型申明数组</returns>
+        </member>
+        <member name="M:Sunny.UI.AssemblyEx.GetDllTypes(System.String)">
+            <summary>
+            获取DLL类型申明数组
+            </summary>
+            <param name="dll">DLL名称</param>
+            <returns>类型申明数组</returns>
+        </member>
+        <member name="M:Sunny.UI.AssemblyEx.CreateInstance(System.Type)">
+            <summary>
+            根据类型申明创建对象
+            </summary>
+            <param name="type">类型申明</param>
+            <returns>对象</returns>
+        </member>
+        <member name="T:Sunny.UI.AttributeEx">
+            <summary>
+            属性扩展类
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.AttributeEx.Description(System.Enum)">
+            <summary>
+            枚举字段描述
+            </summary>
+            <param name="value">枚举</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.AttributeEx.Description(System.Type,System.String)">
+            <summary>
+            获取类型属性的描述信息
+            </summary>
+            <param name="type">类型</param>
+            <param name="propertyName">属性</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.AttributeEx.Description(System.Type)">
+            <summary>
+            获取类型的描述信息
+            </summary>
+            <param name="type">类型</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.AttributeEx.ClassDescription``1(``0)">
+            <summary>
+            获取类的描述信息
+            </summary>
+            <param name="value">类</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.AttributeEx.ClassPropertyDescription``1(``0,System.String)">
+            <summary>
+            获取类属性的描述信息
+            </summary>
+            <param name="type">类</param>
+            <param name="propertyName">属性</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.AttributeEx.StructDescription``1(``0)">
+            <summary>
+            获取结构的描述信息
+            </summary>
+            <param name="value">结构</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.AttributeEx.StructPropertyDescription``1(``0,System.String)">
+            <summary>
+            获取结构属性的描述信息
+            </summary>
+            <param name="type">结构</param>
+            <param name="propertyName">属性</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.AttributeEx.GetCustomAttribute``1(System.Reflection.PropertyInfo)">
+            <summary>
+            获取属性
+            </summary>
+            <param name="info">info</param>
+            <typeparam name="T">T</typeparam>
+            <returns>属性</returns>
+        </member>
+        <member name="M:Sunny.UI.AttributeEx.GetCustomAttribute``1(System.Reflection.FieldInfo)">
+            <summary>
+            获取属性
+            </summary>
+            <param name="info">info</param>
+            <typeparam name="T">T</typeparam>
+            <returns>属性</returns>
+        </member>
+        <member name="M:Sunny.UI.AttributeEx.GetCustomAttribute``1(System.Type)">
+            <summary>
+            获取属性
+            </summary>
+            <param name="type">type</param>
+            <typeparam name="T">T</typeparam>
+            <returns>属性</returns>
+        </member>
+        <member name="M:Sunny.UI.AttributeEx.GetName(System.Reflection.PropertyInfo)">
+            <summary>获取序列化名称</summary>
+            <param name="pi">pi</param>
+            <returns>名称</returns>
+        </member>
+        <member name="T:Sunny.UI.CollectionsEx">
+            <summary>
+            Collections 扩展类
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.ToList``1(System.Collections.ArrayList)">
+            <summary>
+            从 ArrayList 转为 列表
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="arrayList">ArrayList</param>
+            <returns>列表</returns>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.ToDataTable``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            列表 转为 数据表
+            </summary>
+            <typeparam name="TSource">类型</typeparam>
+            <param name="data">列表</param>
+            <returns>数据表</returns>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.SortedKeys``2(System.Collections.Concurrent.ConcurrentDictionary{``0,``1})">
+            <summary>
+            键排序列表
+            </summary>
+            <typeparam name="Key">键</typeparam>
+            <typeparam name="Value">值</typeparam>
+            <param name="dictionary">字典</param>
+            <returns>键排序列表</returns>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.Randomize``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            随机变换List内容
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.RandomizeEx``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            随机变换列表内容(另一种实现方式)
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="source">列表</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.Swap``1(System.Collections.Generic.List{``0},System.Int32,System.Int32)">
+            <summary>
+            交换列表中两个元素的位置
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="list">列表</param>
+            <param name="i">序号1</param>
+            <param name="j">序号2</param>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            循环列表执行事件
+            studentList.Where(st => st.Age != 0)
+                .ForEach(st =>{ st.AgeInMonths = DateTime.Now.Subtract(st.DOB).TotalDays / 30); });
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="function"></param>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.SortedKeys``2(System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            键排序列表
+            </summary>
+            <typeparam name="Key">键</typeparam>
+            <typeparam name="Value">值</typeparam>
+            <param name="dictionary">字典</param>
+            <returns>键排序列表</returns>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.SortedValues``2(System.Collections.Concurrent.ConcurrentDictionary{``0,``1})">
+            <summary>
+            键排序后，取值排序列表
+            </summary>
+            <typeparam name="Key">键</typeparam>
+            <typeparam name="Value">值</typeparam>
+            <param name="dictionary">字典</param>
+            <returns>值排序列表</returns>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.SortedValues``2(System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            键排序后，取值排序列表
+            </summary>
+            <typeparam name="Key">键</typeparam>
+            <typeparam name="Value">值</typeparam>
+            <param name="dictionary">字典</param>
+            <returns>值排序列表</returns>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.Clear``1(System.Collections.Concurrent.ConcurrentQueue{``0})">
+            <summary>
+            清除
+            </summary>
+            <typeparam name="T">T</typeparam>
+            <param name="queue">queue</param>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.NotContainsKey``2(System.Collections.Concurrent.ConcurrentDictionary{``0,``1},``0)">
+            <summary>
+            字典不包含键
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.NotContainsKey``2(System.Collections.Generic.Dictionary{``0,``1},``0)">
+            <summary>
+            字典不包含键
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.ContainsIndex(System.Collections.IList,System.Int32)">
+            <summary>
+            列表是否包含指定索引
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.NotContainsIndex(System.Collections.IList,System.Int32)">
+            <summary>
+            列表是否不包含指定索引
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.First``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            列表第一个元素
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.Last``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            列表最后一个元素
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.Upsert``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
+            <summary>
+            增加或更新
+            </summary>
+            <param name="dictionary">字典</param>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <typeparam name="Key">键类型</typeparam>
+            <typeparam name="Value">值类型</typeparam>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.FindFirstKeyByValue``2(System.Collections.Generic.IDictionary{``0,``1},``1)">
+            <summary>
+            GetOneByValue 从字典中找出第一个值与value相等的记录的key
+            </summary>
+            <typeparam name="TKey">键类型</typeparam>
+            <typeparam name="TValue">值类型</typeparam>
+            <param name="dic">字典</param>
+            <param name="value">值</param>
+            <returns>Key</returns>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.RemoveFirstValue``2(System.Collections.Generic.IDictionary{``0,``1},``1)">
+            <summary>
+            RemoveOneByValue 从字典中删除第一个值与value相等的记录
+            </summary>
+            <typeparam name="TKey">键类型</typeparam>
+            <typeparam name="TValue">值类型</typeparam>
+            <param name="dic">字典</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:Sunny.UI.CollectionsEx.Search``1(System.Collections.Generic.IList{``0},``0)">
+            <summary>
+            Search 返回的是目标值所在的索引，如果不存在则返回-1
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="list">列表</param>
+            <param name="value">值</param>
+            <returns>索引</returns>
+        </member>
+        <member name="T:Sunny.UI.UConsole">
+            <summary>
+            Console 扩展类
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.UConsole.WriteConsole(System.UInt32,System.String)">
+            <summary>
+            将指定的 32 位无符号的整数值的文本表示（后跟当前行的结束符）写入标准输出流。
+            </summary>
+            <param name="value">要写入的值。</param>
+            <param name="prefix">前缀</param>
+        </member>
+        <member name="M:Sunny.UI.UConsole.WriteConsole(System.Int32,System.String)">
+            <summary>
+            将指定的 32 位有符号整数值的文本表示（后跟当前行的结束符）写入标准输出流。
+            </summary>
+            <param name="value">要写入的值。</param>
+            <param name="prefix">前缀</param>
+        </member>
+        <member name="M:Sunny.UI.UConsole.WriteConsole(System.Single,System.String)">
+            <summary>
+            将指定的单精度浮点值的文本表示形式（后跟当前行终止符）写入标准输出流。
+            </summary>
+            <param name="value">要写入的值。</param>
+            <param name="prefix">前缀</param>
+        </member>
+        <member name="M:Sunny.UI.UConsole.WriteConsole(System.Char,System.String)">
+            <summary>
+            将指定的 Unicode 字符值（后跟当前行终止符）写入标准输出流。
+            </summary>
+            <param name="value">要写入的值。</param>
+            <param name="prefix">前缀</param>
+        </member>
+        <member name="M:Sunny.UI.UConsole.WriteConsole(System.Decimal,System.String)">
+            <summary>
+            将指定的 System.Decimal 值的文本表示形式（后跟当前行终止符）写入标准输出流。
+            </summary>
+            <param name="value">要写入的值。</param>
+            <param name="prefix">前缀</param>
+        </member>
+        <member name="M:Sunny.UI.UConsole.WriteConsole(System.Int64,System.String)">
+            <summary>
+            将指定的 64 位有符号整数值的文本表示（后跟当前行的结束符）写入标准输出流。
+            </summary>
+            <param name="value">要写入的值。</param>
+            <param name="prefix">前缀</param>
+        </member>
+        <member name="M:Sunny.UI.UConsole.WriteConsole(System.Char[],System.Int32,System.Int32)">
+            <summary>
+            将指定的 Unicode 字符子数组（后跟当前行终止符）写入标准输出流。
+            </summary>
+            <param name="buffer">Unicode 字符的数组。</param>
+            <param name="index">buffer 中的起始位置。</param>
+            <param name="count">要写入的字符数。</param>
+        </member>
+        <member name="M:Sunny.UI.UConsole.WriteConsole(System.Double,System.String)">
+            <summary>
+            将指定的双精度浮点值的文本表示形式（后跟当前行终止符）写入标准输出流。
+            </summary>
+            <param name="value">要写入的值。</param>
+            <param name="prefix">前缀</param>
+        </member>
+        <member name="M:Sunny.UI.UConsole.WriteConsole(System.String,System.Object,System.Object,System.Object,System.Object)">
+            <summary>
+            使用指定的格式信息，将指定对象的文本表示形式（后跟当前行终止符）写入标准输出流。
+            </summary>
+            <param name="format">复合格式字符串。</param>
+            <param name="arg0">要使用 format 写入的第一个对象</param>
+            <param name="arg1">要使用 format 写入的第二个对象</param>
+            <param name="arg2">要使用 format 写入的第三个对象</param>
+            <param name="arg3">要使用 format 写入的第四个对象</param>
+        </member>
+        <member name="M:Sunny.UI.UConsole.WriteConsole(System.String,System.String)">
+            <summary>
+            将指定的字符串值（后跟当前行终止符）写入标准输出流。
+            </summary>
+            <param name="value">要写入的值。</param>
+            <param name="prefix">前缀</param>
+        </member>
+        <member name="M:Sunny.UI.UConsole.WriteConsole(System.String,System.Object)">
+            <summary>
+            使用指定的格式信息，将指定对象的文本表示形式（后跟当前行终止符）写入标准输出流。
+            </summary>
+            <param name="format">复合格式字符串。</param>
+            <param name="arg0">要使用 format 写入的第一个对象</param>
+        </member>
+        <member name="M:Sunny.UI.UConsole.WriteConsole(System.String,System.Object,System.Object)">
+            <summary>
+            使用指定的格式信息，将指定对象的文本表示形式（后跟当前行终止符）写入标准输出流。
+            </summary>
+            <param name="format">复合格式字符串。</param>
+            <param name="arg0">要使用 format 写入的第一个对象</param>
+            <param name="arg1">要使用 format 写入的第二个对象</param>
+        </member>
+        <member name="M:Sunny.UI.UConsole.WriteConsole(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            使用指定的格式信息，将指定对象的文本表示形式（后跟当前行终止符）写入标准输出流。
+            </summary>
+            <param name="format">复合格式字符串。</param>
+            <param name="arg0">要使用 format 写入的第一个对象</param>
+            <param name="arg1">要使用 format 写入的第二个对象</param>
+            <param name="arg2">要使用 format 写入的第三个对象</param>
+        </member>
+        <member name="M:Sunny.UI.UConsole.WriteConsole(System.String,System.Object[])">
+            <summary>
+            使用指定的格式信息，将指定的对象数组（后跟当前行终止符）的文本表示形式写入标准输出流。
+            </summary>
+            <param name="format">复合格式字符串。</param>
+            <param name="arg">要使用 format 写入的第一个对象</param>
+        </member>
+        <member name="M:Sunny.UI.UConsole.WriteConsole(System.Boolean,System.String)">
+            <summary>
+            将指定布尔值的文本表示形式（后跟当前行终止符）写入标准输出流。
+            </summary>
+            <param name="value">要写入的值。</param>
+            <param name="prefix">前缀</param>
+        </member>
+        <member name="M:Sunny.UI.UConsole.WriteConsole(System.Object,System.String)">
+            <summary>
+            将指定对象的文本表示形式（后跟当前行终止符）写入标准输出流。
+            </summary>
+            <param name="value">要写入的值。</param>
+            <param name="prefix">前缀</param>
+        </member>
+        <member name="M:Sunny.UI.UConsole.WriteConsole(System.Char[],System.String)">
+            <summary>
+            将指定的 Unicode 字符数组（后跟当前行终止符）写入标准输出流。
+            </summary>
+            <param name="buffer">Unicode 字符数组。</param>
+            <param name="prefix">前缀</param>
+        </member>
+        <member name="M:Sunny.UI.UConsole.WriteConsole(System.Exception,System.String)">
+            <summary>
+            将指定的 异常 写入标准输出流。
+            </summary>
+            <param name="exception">Unicode 字符数组。</param>
+            <param name="prefix">前缀</param>
+        </member>
+        <member name="T:Sunny.UI.DataReaderEx">
+            <summary>
+            数据读取扩展类
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.IsInState(System.Data.IDbConnection,System.Data.ConnectionState)">
+            <summary>
+            如果数据库连接处于指定状态则返回 true。
+            </summary>
+            <param name="connection">数据连接</param>
+            <param name="state">连接状态</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.OpenIfNot(System.Data.IDbConnection)">
+            <summary>
+            如果数据库连接未打开则打开连接。
+            </summary>
+            <param name="connection">数据连接</param>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.Get``1(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并转换为指定类型，如果为 null 则返回类型的默认值。
+            </summary>
+            <typeparam name = "T">返回的数据类型</typeparam>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.Get``1(System.Data.IDataReader,System.String,``0)">
+            <summary>
+            获取指定字段的值并转换为指定类型，如果为 null 则返回指定的默认值。
+            </summary>
+            <typeparam name = "T">返回的数据类型</typeparam>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <param name = "defaultValue">默认值</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetBytes(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并转换为字节数组。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetString(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并转换为字符串，如果为 null 则返回 null。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetString(System.Data.IDataReader,System.String,System.String)">
+            <summary>
+            获取指定字段的值并转换为字符串，如果为 null 则返回指定的默认值。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <param name = "defaultValue">默认值</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetGuid(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并转换为 Guid，如果为 null 则返回 Guid.Empty。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetNullableGuid(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并转换为可空 Guid，如果为 null 则返回 null。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetDateTime(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并转换为 DateTime，如果为 null 则返回 DateTime.MinValue。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetDateTime(System.Data.IDataReader,System.String,System.DateTime)">
+            <summary>
+            获取指定字段的值并转换为 DateTime，如果为 null 则返回指定的默认值。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <param name = "defaultValue">默认值</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetNullableDateTime(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并转换为可空 DateTime，如果为 null 则返回 null。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetDateTimeOffset(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并转换为 DateTimeOffset（UTC），如果为 null 则返回 DateTime.MinValue。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetDateTimeOffset(System.Data.IDataReader,System.String,System.DateTimeOffset)">
+            <summary>
+            获取指定字段的值并转换为 DateTimeOffset（UTC），如果为 null 则返回指定的默认值。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <param name = "defaultValue">默认值</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetNullableDateTimeOffset(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并转换为可空 DateTimeOffset（UTC），如果为 null 则返回 null。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetInt32(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并转换为 int，如果为 null 则返回 0。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetInt32(System.Data.IDataReader,System.String,System.Int32)">
+            <summary>
+            获取指定字段的值并转换为 int，如果为 null 则返回指定的默认值。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <param name = "defaultValue">默认值</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetNullableInt32(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并转换为可空 int，如果为 null 则返回 null。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetInt64(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并转换为 long，如果为 null 则返回 0。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetInt64(System.Data.IDataReader,System.String,System.Int32)">
+            <summary>
+            获取指定字段的值并转换为 long，如果为 null 则返回指定的默认值。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <param name = "defaultValue">默认值</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetNullableInt64(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并转换为可空 long，如果为 null 则返回 null。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetDecimal(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并转换为 decimal，如果为 null 则返回 0。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetDecimal(System.Data.IDataReader,System.String,System.Int64)">
+            <summary>
+            获取指定字段的值并转换为 decimal，如果为 null 则返回指定的默认值。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <param name = "defaultValue">默认值</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetNullableDecimal(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并转换为可空 decimal，如果为 null 则返回 null。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetBoolean(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并转换为 bool，如果为 null 则返回 false。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetBoolean(System.Data.IDataReader,System.String,System.Boolean)">
+            <summary>
+            获取指定字段的值并转换为 bool，如果为 null 则返回指定的默认值。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <param name = "defaultValue">默认值</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetNullableBoolean(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并转换为可空 bool，如果为 null 则返回 null。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetType(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并转换为 Type 类型实例，如果为 null 则返回 null。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetType(System.Data.IDataReader,System.String,System.Type)">
+            <summary>
+            获取指定字段的值并转换为 Type 类型实例，如果为 null 则返回指定的默认值。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <param name = "defaultValue">默认值</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetTypeInstance(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并根据类型名实例化对象，如果为 null 则返回 null。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetTypeInstance(System.Data.IDataReader,System.String,System.Type)">
+            <summary>
+            获取指定字段的值并根据类型名实例化对象，如果为 null 则返回指定类型的实例。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <param name = "defaultValue">默认值</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetTypeInstance``1(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并根据类型名实例化对象并转换为指定类型，如果为 null 则返回 null。
+            </summary>
+            <typeparam name = "T">要转换的类型</typeparam>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetTypeInstanceSafe``1(System.Data.IDataReader,System.String,System.Type)">
+            <summary>
+            获取指定字段的值并根据类型名实例化对象并转换为指定类型，如果为 null 则返回指定类型的实例。
+            </summary>
+            <typeparam name = "T">要转换的类型</typeparam>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <param name = "type">类型</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.GetTypeInstanceSafe``1(System.Data.IDataReader,System.String)">
+            <summary>
+            获取指定字段的值并根据类型名实例化对象并转换为指定类型，如果为 null 则返回 new T()。
+            </summary>
+            <typeparam name = "T">要转换的类型</typeparam>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>字段值</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.IsDBNull(System.Data.IDataReader,System.String)">
+            <summary>
+            判断指定字段的值是否为 DBNull.Value。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "field">字段名</param>
+            <returns>
+            如果值为 DBNull.Value 返回 <c>true</c>，否则返回 <c>false</c>。
+            </returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.ReadAll(System.Data.IDataReader,System.Action{System.Data.IDataReader})">
+            <summary>
+            读取数据读取器中的所有记录，并对每条记录执行指定操作。
+            </summary>
+            <param name = "reader">数据读取器</param>
+            <param name = "action">要执行的操作</param>
+            <returns>执行操作的次数</returns>
+        </member>
+        <member name="M:Sunny.UI.DataReaderEx.IndexOf(System.Data.IDataRecord,System.String)">
+            <summary>
+            获取要查找的字段的索引
+            </summary>
+            <param name="record">记录</param>
+            <param name="name">字段名</param>
+            <returns>索引</returns>
+        </member>
+        <member name="T:Sunny.UI.DateTimeEx">
+            <summary>
+            日期扩展类
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.DateTimeEx.DateLink">
+            <summary>
+            日期连接符
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.DateTimeEx.DateLinkEx">
+            <summary>
+            日期连接符
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.DateTimeEx.TimeLink">
+            <summary>
+            时间连接符
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.DateTimeEx.DateTimeFormatEx">
+            <summary>
+            日期(包含毫秒) - 格式化字符串 yyyy-MM-dd HH:mm:ss.fff
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.DateTimeEx.DateTimeFormat">
+            <summary>
+            日期 - 格式化字符串 yyyy-MM-dd HH:mm:ss
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.DateTimeEx.DateFormat">
+            <summary>
+            年月日 - 格式化字符串 yyyy-MM-dd
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.DateTimeEx.TimeFormat">
+            <summary>
+            时分秒 - 格式化字符串 HH:mm:ss
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.TrimLink(System.String)">
+            <summary>
+            去除格式化字符串中的分隔符
+            </summary>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.String(System.DateTime)">
+            <summary>
+            yyyy-MM-dd HH:mm:ss (2001-02-03 04:05:06)
+            </summary>
+            <param name="dt">DateTime</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.DateTimeString(System.DateTime,System.Boolean)">
+            <summary>
+            yyyy-MM-dd HH:mm:ss (2001-02-03 04:05:06)
+            </summary>
+            <param name="dt">DateTime</param>
+            <param name="withLink"></param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.DateTimeExString(System.DateTime,System.Boolean)">
+            <summary>
+            yyyy-MM-dd HH:mm:ss.fff (2001-02-03 04:05:06.789)
+            </summary>
+            <param name="dt">DateTime</param>
+            <param name="withLink"></param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.DateString(System.DateTime,System.Boolean)">
+            <summary>
+            yyyy-MM-dd (2001-02-03)
+            </summary>
+            <param name="dt">DateTime</param>
+            <param name="withLink"></param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.TimeString(System.DateTime,System.Boolean)">
+            <summary>
+            HH:mm:ss (04:05:06)
+            </summary>
+            <param name="dt">DateTime</param>
+            <param name="withLink"></param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.YearMonthString(System.DateTime,System.Boolean)">
+            <summary>
+            yyyy-MM (2001-02)
+            </summary>
+            <param name="dt">DateTime</param>
+            <param name="withLink"></param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.YearString(System.DateTime)">
+            <summary>
+            yyyy (2001)
+            </summary>
+            <param name="dt">DateTime</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.TenMinuteIndex(System.DateTime)">
+            <summary>
+            十分钟一次的索引（0-143）
+            </summary>
+            <param name="dt">日期</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.MonthDays(System.DateTime)">
+            <summary>
+            当月天数列表
+            </summary>
+            <param name="dt">DateTime</param>
+            <returns>List</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.MonthDayStrings(System.DateTime)">
+            <summary>
+            当月天数列表字符串
+            </summary>
+            <param name="dt">DateTime</param>
+            <returns>List</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.ToDouble(System.DateTime)">
+            <summary>
+            时间日期转浮点，以2000-01-01 00：00：00起始
+            </summary>
+            <param name="datetime">日期</param>
+            <returns>浮点</returns>
+        </member>
+        <member name="F:Sunny.UI.DateTimeEx.Jan1st1970">
+            <summary>
+            起始日期，UTC时间，1970-01-01 00：00：00起始
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.ToDateTime(System.Double)">
+            <summary>
+            浮点转时间日期，以UTC时间，1970-01-01 00：00：00起始
+            </summary>
+            <param name="iDays">浮点</param>
+            <returns>日期</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.DaysInMonth(System.DateTime)">
+            <summary>
+            计算当前月份有多少天
+            </summary>
+            <param name = "date">The date.</param>
+            <returns>The number of days.</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.StartOfMonth(System.DateTime)">
+            <summary>
+            此月第一天
+            </summary>
+            <param name = "date">The date.</param>
+            <returns>The first day of the month</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.FirstDayOfMonth(System.DateTime)">
+            <summary>
+            此月第一天
+            </summary>
+            <param name = "date">The date.</param>
+            <returns>The first day of the month</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.FirstDayOfMonth(System.DateTime,System.DayOfWeek)">
+            <summary>
+            此月第一天
+            </summary>
+            <param name = "date">The date.</param>
+            <param name = "dayOfWeek">The desired day of week.</param>
+            <returns>The first day of the month</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.LastDayOfMonth(System.DateTime)">
+            <summary>
+            此月最后一天
+            </summary>
+            <param name = "date">The date.</param>
+            <returns>The last day of the month.</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.LastDayOfMonth(System.DateTime,System.DayOfWeek)">
+            <summary>
+            此月最后一天
+            </summary>
+            <param name = "date">The date.</param>
+            <param name = "dayOfWeek">The desired day of week.</param>
+            <returns>The date time</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.IsToday(System.DateTime)">
+            <summary>
+            是否是当天
+            </summary>
+            <param name = "dt">The date.</param>
+            <returns>
+            	<c>true</c> if the specified date is today; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.SetTime(System.DateTime,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            设置时间
+            </summary>
+            <param name = "date">The base date.</param>
+            <param name = "hours">The hours to be set.</param>
+            <param name = "minutes">The minutes to be set.</param>
+            <param name = "seconds">The seconds to be set.</param>
+            <returns>The DateTime including the new time value</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.SetTime(System.DateTime,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            设置时间
+            </summary>
+            <param name = "date">The base date.</param>
+            <param name="hours">The hour</param>
+            <param name="minutes">The minute</param>
+            <param name="seconds">The second</param>
+            <param name="milliseconds">The millisecond</param>
+            <returns>The DateTime including the new time value</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.ZeroSecond(System.DateTime)">
+            <summary>
+            设置秒，毫秒为0
+            </summary>
+            <param name="datetime">值</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.ZeroMillisecond(System.DateTime)">
+            <summary>
+            设置毫秒为0
+            </summary>
+            <param name="datetime">值</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.SetTime(System.DateTime,System.TimeSpan)">
+            <summary>
+            设置时间
+            </summary>
+            <param name = "date">The base date.</param>
+            <param name = "span">The TimeSpan to be applied.</param>
+            <returns>
+            	The DateTime including the new time value
+            </returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.IsDateEqual(System.DateTime,System.DateTime)">
+            <summary>
+            日期是否相同
+            </summary>
+            <param name = "date">The date.</param>
+            <param name = "dateToCompare">The date to compare with.</param>
+            <returns>
+            	<c>true</c> if both date values are equal; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.IsTimeEqual(System.DateTime,System.DateTime)">
+            <summary>
+            时间是否相同
+            </summary>
+            <param name = "time">The time.</param>
+            <param name = "timeToCompare">The time to compare.</param>
+            <returns>
+            	<c>true</c> if both time values are equal; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.SecondsSince1970(System.DateTime)">
+            <summary>
+            Get seconds of UNIX area. This is the milliseconds since 1/1/1970
+            </summary>
+            <param name = "datetime">Up to which time.</param>
+            <returns>number of milliseconds.</returns>
+            <remarks>
+            http://www.codeplex.com/site/users/view/blaumeiser
+            </remarks>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.Tomorrow(System.DateTime)">
+            <summary>
+            明天
+            </summary>
+            <param name="date">The current day</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.Yesterday(System.DateTime)">
+            <summary>
+            昨天
+            </summary>
+            <param name="date">The current day</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.StartOfDay(System.DateTime)">
+            <summary>
+            当日开始
+            </summary>
+            <param name="date">The DateTime to be processed</param>
+            <returns>The date at 0:0:0.000</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.EndOfDay(System.DateTime)">
+            <summary>
+            当日结束
+            </summary>
+            <param name="date">The DateTime to be processed</param>
+            <returns>The date at 23:59:59.999</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.EndOfMonth(System.DateTime)">
+            <summary>
+            当月结束
+            </summary>
+            <param name="date">The DateTime to be processed</param>
+            <returns>当月结束</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.BeginOfMonth(System.DateTime)">
+            <summary>
+            当月结束
+            </summary>
+            <param name="date">The DateTime to be processed</param>
+            <returns>当月结束</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.Noon(System.DateTime)">
+            <summary>
+            中午
+            </summary>
+            <param name="time">The current date</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.Midnight(System.DateTime)">
+            <summary>
+            午夜
+            </summary>
+            <param name="time">The current date</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.January(System.Int32,System.Int32)">
+            <summary>
+            一月
+            </summary>
+            <param name="year">年</param>
+            <param name="day">日</param>
+            <returns>时间</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.February(System.Int32,System.Int32)">
+            <summary>
+            二月
+            </summary>
+            <param name="year">年</param>
+            <param name="day">日</param>
+            <returns>时间</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.March(System.Int32,System.Int32)">
+            <summary>
+            三月
+            </summary>
+            <param name="year">年</param>
+            <param name="day">日</param>
+            <returns>时间</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.April(System.Int32,System.Int32)">
+            <summary>
+            四月
+            </summary>
+            <param name="year">年</param>
+            <param name="day">日</param>
+            <returns>时间</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.May(System.Int32,System.Int32)">
+            <summary>
+            五月
+            </summary>
+            <param name="year">年</param>
+            <param name="day">日</param>
+            <returns>时间</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.June(System.Int32,System.Int32)">
+            <summary>
+            六月
+            </summary>
+            <param name="year">年</param>
+            <param name="day">日</param>
+            <returns>时间</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.July(System.Int32,System.Int32)">
+            <summary>
+            七月
+            </summary>
+            <param name="year">年</param>
+            <param name="day">日</param>
+            <returns>时间</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.August(System.Int32,System.Int32)">
+            <summary>
+            八月
+            </summary>
+            <param name="year">年</param>
+            <param name="day">日</param>
+            <returns>时间</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.September(System.Int32,System.Int32)">
+            <summary>
+            九月
+            </summary>
+            <param name="year">年</param>
+            <param name="day">日</param>
+            <returns>时间</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.October(System.Int32,System.Int32)">
+            <summary>
+            十月
+            </summary>
+            <param name="year">年</param>
+            <param name="day">日</param>
+            <returns>时间</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.November(System.Int32,System.Int32)">
+            <summary>
+            十一月
+            </summary>
+            <param name="year">年</param>
+            <param name="day">日</param>
+            <returns>时间</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.December(System.Int32,System.Int32)">
+            <summary>
+            十二月
+            </summary>
+            <param name="year">年</param>
+            <param name="day">日</param>
+            <returns>时间</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.AllTenMinutes(System.DateTime)">
+            <summary>
+            获取当天的每隔十分钟的时间列表（共144场）
+            </summary>
+            <param name="date">日期</param>
+            <returns>列表</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.TrimSeconds(System.DateTime)">
+            <summary>
+            格式化时间设置秒、毫秒为0
+            </summary>
+            <param name="dateTime">值</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.TrimMilliseconds(System.DateTime)">
+            <summary>
+            格式化时间设置毫秒为0
+            </summary>
+            <param name="dateTime">值</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.TicksToDateTime(System.Int64)">
+            <summary>
+            TimeTicks转时间
+            </summary>
+            <param name="timeTicks">值</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.IsMonthBeginOneHour(System.DateTime)">
+            <summary>
+            某月第一天第一个小时
+            </summary>
+            <param name="value">时间</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.IsMultiSix(System.DateTime)">
+            <summary>
+            是否是六分钟的整数倍
+            </summary>
+            <param name="value">时间</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.SetLocalDate(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            设置本地电脑的年月日
+            </summary>
+            <param name="year">年</param>
+            <param name="month">月</param>
+            <param name="day">日</param>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.SetLocalTime(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            设置本机电脑的时分秒
+            </summary>
+            <param name="hour">时</param>
+            <param name="min">分</param>
+            <param name="sec">秒</param>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.SetLocalDateTime(System.DateTime)">
+            <summary>
+            设置本机电脑的年月日和时分秒
+            </summary>
+            <param name="time">时间</param>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.StartOfWeek(System.DateTime)">
+            <summary>
+            获取当前日期中本周的第一天。
+            </summary>
+            <param name="date">当前的日期。</param>
+            <returns>指定日期中本周的第一天。</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.EndOfWeek(System.DateTime)">
+            <summary>
+            获取当前日期中本周的最后一天。
+            </summary>
+            <param name="date">当前的日期。</param>
+            <returns>指定日期中本周的最后一天。</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.IsLeapYear(System.DateTime)">
+            <summary>
+            判断该日期中的年份是否为闰年。
+            </summary>
+            <param name="date">当前的日期。</param>
+            <returns>如果指定日期的年份是闰年，则为 true，否则为 false。</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.AssemblyLastWriteTime(System.Reflection.Assembly)">
+            <summary>
+            获取程序集的最后修改时间
+            </summary>
+            <param name="assembly">程序集</param>
+            <returns>最后修改时间</returns>
+        </member>
+        <member name="M:Sunny.UI.DateTimeEx.AssemblyLastWriteTime(System.Type)">
+            <summary>
+            获取类所在程序集的最后修改时间
+            </summary>
+            <param name="type">类</param>
+            <returns>最后修改时间</returns>
+        </member>
+        <member name="T:Sunny.UI.Dir">
+            <summary>
+            目录处理类
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.Dir.CreateDir(System.String)">
+            <summary>
+            创建一个目录
+            </summary>
+            <param name="dir">目录的绝对路径</param>
+        </member>
+        <member name="M:Sunny.UI.Dir.CurrentDir">
+            <summary>
+            返回当前基目录
+            </summary>
+            <returns>基目录</returns>
+        </member>
+        <member name="M:Sunny.UI.Dir.TempPath">
+            <summary>
+            Temp文件夹，末尾包括目录分隔符
+            </summary>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.Dir.TempRandomPath">
+            <summary>
+            Temp文件夹下唯一的新建临时文件夹，末尾包括目录分隔符
+            </summary>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.Dir.TryDelete(System.String)">
+            <summary>
+            尝试删除非空文件夹
+            </summary>
+            <param name="dir">文件夹</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.Dir.YearMonthDayFolder(System.DateTime,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            在指定目录下创建以年月日分级的子目录，末尾包括目录分隔符
+            </summary>
+            <param name="dt">日期</param>
+            <param name="dir">文件夹</param>
+            <param name="createIfNotExist">不存在是否创建</param>
+            <param name="withLink">日期连接符</param>
+            <returns>文件夹名</returns>
+        </member>
+        <member name="M:Sunny.UI.Dir.YearMonthFolder(System.DateTime,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            在指定目录下创建以年月分级的子目录，末尾包括\
+            </summary>
+            <param name="dt">日期</param>
+            <param name="dir">文件夹</param>
+            <param name="createIfNotExist">不存在是否创建</param>
+            <param name="withLink">日期连接符</param>
+            <returns>文件夹名</returns>
+        </member>
+        <member name="M:Sunny.UI.Dir.Copy(System.String,System.String)">
+            <summary>
+            复制
+            </summary>
+            <param name="sourceDir">源目录</param>
+            <param name="destDir">目标目录</param>
+        </member>
+        <member name="M:Sunny.UI.Dir.Copy(System.IO.DirectoryInfo,System.IO.DirectoryInfo)">
+            <summary>
+            复制
+            </summary>
+            <param name="source">源目录</param>
+            <param name="dest">目标目录</param>
+        </member>
+        <member name="T:Sunny.UI.Drawing">
+            <summary>
+            绘图扩展类
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.Drawing.GetIntersection(System.Drawing.PointF,System.Drawing.PointF,System.Drawing.PointF,System.Drawing.PointF,System.Drawing.PointF@)">
+            <summary>
+            计算两条直线的交点
+            </summary>
+            <param name="lineFirstStar">L1的点1坐标</param>
+            <param name="lineFirstEnd">L1的点2坐标</param>
+            <param name="lineSecondStar">L2的点1坐标</param>
+            <param name="lineSecondEnd">L2的点2坐标</param>
+            <param name="intersection">交点</param>
+            <returns>是否有交点</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.CalcAzRangePoint(System.Drawing.PointF,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            根据中心点、范围和方位角计算点的位置
+            </summary>
+            <param name="center">中心点</param>
+            <param name="range">范围</param>
+            <param name="az">方位角（度）</param>
+            <param name="xOffset">X偏移</param>
+            <param name="yOffset">Y偏移</param>
+            <returns>计算出的点</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.CalcAzRangePoint(System.Drawing.Point,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            根据中心点、范围和方位角计算点的位置
+            </summary>
+            <param name="center">中心点</param>
+            <param name="range">范围</param>
+            <param name="az">方位角（度）</param>
+            <param name="xOffset">X偏移</param>
+            <param name="yOffset">Y偏移</param>
+            <returns>计算出的点</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.CalcDistance(System.Drawing.PointF,System.Drawing.PointF)">
+            <summary>
+            计算两点之间的距离
+            </summary>
+            <param name="pt1">点1</param>
+            <param name="pt2">点2</param>
+            <returns>距离</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.CalcDistance(System.Drawing.Point,System.Drawing.Point)">
+            <summary>
+            计算两点之间的距离
+            </summary>
+            <param name="pt1">点1</param>
+            <param name="pt2">点2</param>
+            <returns>距离</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.CalcDistance(System.Drawing.PointF,System.Drawing.Point)">
+            <summary>
+            计算两点之间的距离
+            </summary>
+            <param name="pt1">点1</param>
+            <param name="pt2">点2</param>
+            <returns>距离</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.CalcDistance(System.Drawing.Point,System.Drawing.PointF)">
+            <summary>
+            计算两点之间的距离
+            </summary>
+            <param name="pt1">点1</param>
+            <param name="pt2">点2</param>
+            <returns>距离</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.CalcAngle(System.Drawing.Point,System.Drawing.Point)">
+            <summary>
+            计算从一点到另一点的角度
+            </summary>
+            <param name="thisPoint">起始点</param>
+            <param name="toPoint">目标点</param>
+            <returns>角度（度）</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.CalcAngle(System.Drawing.PointF,System.Drawing.PointF)">
+            <summary>
+            计算从一点到另一点的角度
+            </summary>
+            <param name="thisPoint">起始点</param>
+            <param name="toPoint">目标点</param>
+            <returns>角度（度）</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.CalcAngle(System.Drawing.Point,System.Drawing.PointF)">
+            <summary>
+            计算从一点到另一点的角度
+            </summary>
+            <param name="thisPoint">起始点</param>
+            <param name="toPoint">目标点</param>
+            <returns>角度（度）</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.CalcAngle(System.Drawing.PointF,System.Drawing.Point)">
+            <summary>
+            计算从一点到另一点的角度
+            </summary>
+            <param name="thisPoint">起始点</param>
+            <param name="toPoint">目标点</param>
+            <returns>角度（度）</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.Center(System.Drawing.Rectangle)">
+            <summary>
+            获取矩形的中心点
+            </summary>
+            <param name="rect">矩形</param>
+            <returns>中心点</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.Center(System.Drawing.RectangleF)">
+            <summary>
+            获取矩形的中心点
+            </summary>
+            <param name="rect">矩形</param>
+            <returns>中心点</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.Alpha(System.Drawing.Color,System.Byte)">
+            <summary>
+            设置颜色的透明度
+            </summary>
+            <param name="color">颜色</param>
+            <param name="alpha">透明度值</param>
+            <returns>带有透明度的颜色</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.InRect(System.Drawing.Point,System.Drawing.Rectangle)">
+            <summary>
+            检查点是否在矩形内
+            </summary>
+            <param name="point">点</param>
+            <param name="rect">矩形</param>
+            <returns>是否在矩形内</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.InRect(System.Drawing.Point,System.Drawing.RectangleF)">
+            <summary>
+            检查点是否在矩形内
+            </summary>
+            <param name="point">点</param>
+            <param name="rect">矩形</param>
+            <returns>是否在矩形内</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.InRect(System.Drawing.PointF,System.Drawing.Rectangle)">
+            <summary>
+            检查点是否在矩形内
+            </summary>
+            <param name="point">点</param>
+            <param name="rect">矩形</param>
+            <returns>是否在矩形内</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.InRect(System.Drawing.PointF,System.Drawing.RectangleF)">
+            <summary>
+            检查点是否在矩形内
+            </summary>
+            <param name="point">点</param>
+            <param name="rect">矩形</param>
+            <returns>是否在矩形内</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.IsOverlap(System.Drawing.Rectangle,System.Drawing.Rectangle)">
+            <summary>
+            两个矩阵是否重叠（边沿重叠，也认为是重叠）
+            </summary>
+            <param name="rc1">第一个矩阵的位置</param>
+            <param name="rc2">第二个矩阵的位置</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.IsOverlap(System.Drawing.RectangleF,System.Drawing.RectangleF)">
+            <summary>
+            两个矩阵是否重叠（边沿重叠，也认为是重叠）
+            </summary>
+            <param name="rc1">第一个矩阵的位置</param>
+            <param name="rc2">第二个矩阵的位置</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.CreateRectangleF(System.Drawing.PointF,System.Drawing.PointF)">
+            <summary>
+            两点创建一个矩形
+            </summary>
+            <param name="pf1">点1</param>
+            <param name="pf2">点2</param>
+            <returns>矩形</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.CreateRectangle(System.Drawing.Point,System.Drawing.Point)">
+            <summary>
+            两点创建一个矩形
+            </summary>
+            <param name="pf1">点1</param>
+            <param name="pf2">点2</param>
+            <returns>矩形</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.StepColor(System.Drawing.Color,System.Int32)">
+            <summary>
+            设置递进颜色
+            </summary>
+            <param name="color">颜色</param>
+            <param name="alpha">alpha</param>
+            <returns>颜色</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.IsNullOrEmpty(System.Drawing.Color)">
+            <summary>
+            颜色是否为空
+            </summary>
+            <param name="color">颜色</param>
+            <returns>是否为空</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.IsValid(System.Drawing.Color)">
+            <summary>
+            颜色是否有效
+            </summary>
+            <param name="color">颜色</param>
+            <returns>是否有效</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.Offset(System.Drawing.Point,System.Drawing.Size)">
+            <summary>
+            平移
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.Drawing.MultiplyWidth(System.Drawing.Size,System.Int32)">
+            <summary>
+            宽度放大
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.Drawing.MultiplyHeight(System.Drawing.Size,System.Int32)">
+            <summary>
+            高度放大
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.Drawing.MultiplyAll(System.Drawing.Size,System.Int32)">
+            <summary>
+            宽度和高度放大
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.Drawing.MultiplyWidth(System.Drawing.Size,System.Double)">
+            <summary>
+            宽度放大
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.Drawing.MultiplyHeight(System.Drawing.Size,System.Double)">
+            <summary>
+            高度放大
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.Drawing.MultiplyAll(System.Drawing.Size,System.Double)">
+            <summary>
+            宽度和高度放大
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.Drawing.IsVisible(System.Drawing.Rectangle)">
+            <summary>
+            区域是否可见
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.Drawing.RandomColor">
+            <summary>
+            随机颜色
+            </summary>
+            <returns>颜色</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.MixColors(System.Drawing.Color[])">
+            <summary>
+            混合颜色
+            </summary>
+            <param name="colors">多个颜色</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.IsLightColor(System.Drawing.Color)">
+            <summary>
+            颜色是否是浅色
+            </summary>
+            <param name="color">颜色</param>
+            <returns>是否是浅色</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.ForeColor(System.Drawing.Color)">
+            <summary>
+            根据背景色判断前景色
+            </summary>
+            <param name="backColor">背景色</param>
+            <returns>前景色</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.Size(System.Drawing.SizeF)">
+            <summary>
+            SizeF转Size
+            </summary>
+            <param name="size">SizeF</param>
+            <returns>Size</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.Point(System.Drawing.PointF)">
+            <summary>
+            PointF转Point
+            </summary>
+            <param name="point">PointF</param>
+            <returns>Point</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.Add(System.Drawing.Size,System.Int32,System.Int32)">
+            <summary>
+            Size增加长宽
+            </summary>
+            <param name="size">Size</param>
+            <param name="width">宽</param>
+            <param name="height">长</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.Add(System.Drawing.SizeF,System.Single,System.Single)">
+            <summary>
+            SizeF增加长宽
+            </summary>
+            <param name="size">SizeF</param>
+            <param name="width">宽</param>
+            <param name="height">长</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.ToHTML(System.Drawing.Color)">
+            <summary>
+            Color转HTML
+            </summary>
+            <param name="color">Color</param>
+            <returns>HTML</returns>
+        </member>
+        <member name="M:Sunny.UI.Drawing.ToColor(System.String,System.Int32)">
+            <summary>
+            HTML转Color
+            </summary>
+            <param name="htmlColor">HTML</param>
+            <param name="alpha">透明度</param>
+            <returns>Color</returns>
+        </member>
+        <member name="T:Sunny.UI.EnumEx">
+            <summary>
+            枚举扩展类
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.EnumEx.ToEnum``1(System.String,System.Boolean)">
+            <summary>
+            将字符串转换为枚举类型
+            </summary>
+            <typeparam name="TEnum">TEnum</typeparam>
+            <param name="dataToMatch">dataToMatch</param>
+            <param name="ignoreCase">忽略大小写</param>
+            <returns>枚举类型</returns>
+        </member>
+        <member name="M:Sunny.UI.EnumEx.InEnum``1(System.String)">
+            <summary>
+            判断字符串是否为枚举类型
+            </summary>
+            <typeparam name="TEnum">TEnum</typeparam>
+            <param name="dataToCheck">dataToCheck</param>
+            <returns>结果</returns>
+        </member>
+        <member name="T:Sunny.UI.Html">
+            <summary>
+            HTML 相关帮助类
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.Html.DealApiParam(System.String,System.Boolean)">
+            <summary>
+            字符串转义，处理URL参数
+            </summary>
+            <param name="param">参数</param>
+            <param name="dealPercentSign">处理百分号</param>
+            <returns>结果</returns>
+        </member>
+        <member name="T:Sunny.UI.MathEx">
+            <summary>
+            数学扩展类
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.MathEx.Get2PowNHigh(System.Int32)">
+            <summary>
+            得到最接近数字且大于数字的二的N次方数
+            </summary>
+            <param name="value">数字</param>
+            <returns>二的N次方数</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.Get2PowNLow(System.Int32)">
+            <summary>
+            得到最接近数字且小于数字的二的N次方数
+            </summary>
+            <param name="value">数字</param>
+            <returns>二的N次方数</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.BinarySearchNearIndex(System.Double[],System.Double)">
+            <summary>
+            二分查找与最近值序号
+            </summary>
+            <param name="array">列表</param>
+            <param name="target">值</param>
+            <returns>最近值序号</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.BinarySearchNearIndex(System.Single[],System.Double)">
+            <summary>
+            二分查找与最近值序号
+            </summary>
+            <param name="array">列表</param>
+            <param name="target">值</param>
+            <returns>最近值序号</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.BinarySearchNearIndex(System.Int32[],System.Double)">
+            <summary>
+            二分查找与最近值序号
+            </summary>
+            <param name="array">列表</param>
+            <param name="target">值</param>
+            <returns>最近值序号</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.BinarySearchNearIndex(System.Int64[],System.Double)">
+            <summary>
+            二分查找与最近值序号
+            </summary>
+            <param name="array">列表</param>
+            <param name="target">值</param>
+            <returns>最近值序号</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.BinarySearchNearIndex(System.UInt16[],System.Double)">
+            <summary>
+            二分查找与最近值序号
+            </summary>
+            <param name="array">列表</param>
+            <param name="target">值</param>
+            <returns>最近值序号</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.HexToInt(System.String)">
+            <summary>
+            十六进制转十进制
+            </summary>
+            <param name="str">str</param>
+            <returns>int</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.BinToInt(System.String)">
+            <summary>
+            二进制转十进制
+            </summary>
+            <param name="str">str</param>
+            <returns>int</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.ToBinString(System.UInt64)">
+            <summary>
+            八字节转二进制字符串
+            </summary>
+            <param name="value">value</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.ToBinString(System.UInt32)">
+            <summary>
+            四字节转二进制字符串
+            </summary>
+            <param name="value">value</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.ToBinString(System.UInt16)">
+            <summary>
+            双字节转二进制字符串
+            </summary>
+            <param name="value">value</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.ToBinString(System.Byte)">
+            <summary>
+            单字节转二进制字符串
+            </summary>
+            <param name="value">value</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.RoundEx(System.Double)">
+            <summary>
+            取整
+            </summary>
+            <param name="value">值</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.RoundEx(System.Single)">
+            <summary>
+            取整
+            </summary>
+            <param name="value">值</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.EqualsFloat(System.Single,System.Single,System.Single)">
+            <summary>
+            判断浮点数相等
+            </summary>
+            <param name="valueA">A</param>
+            <param name="valueB">B</param>
+            <param name="eps">范围</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.EqualsDouble(System.Double,System.Double,System.Single)">
+            <summary>
+            判断双精度数是否相等
+            </summary>
+            <param name="valueA">A</param>
+            <param name="valueB">B</param>
+            <param name="eps">范围</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.Div(System.Int32,System.Int32)">
+            <summary>
+            除取整
+            </summary>
+            <param name="value">值</param>
+            <param name="divParam">除数</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.Mod(System.Int32,System.Int32)">
+            <summary>
+            除取余
+            </summary>
+            <param name="value">值</param>
+            <param name="divParam">除数</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.Rad(System.Double)">
+            <summary>
+            角度转弧度
+            </summary>
+            <param name="angle">角度</param>
+            <returns>弧度</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.Deg(System.Double)">
+            <summary>
+            弧度转角度
+            </summary>
+            <param name="radian">弧度</param>
+            <returns>角度</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.Rad(System.Single)">
+            <summary>
+            角度转弧度
+            </summary>
+            <param name="angle">角度</param>
+            <returns>弧度</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.Deg(System.Single)">
+            <summary>
+            弧度转角度
+            </summary>
+            <param name="radian">弧度</param>
+            <returns>角度</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.IsZero(System.Double)">
+            <summary>
+            是否为0
+            </summary>
+            <param name="value">值</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.IsZero(System.Single)">
+            <summary>
+            是否为0
+            </summary>
+            <param name="value">值</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.InRange``1(``0,``0,``0)">
+            <summary>
+            判断值是否在范围内(包含两端)
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="value">值</param>
+            <param name="minValue">小值</param>
+            <param name="maxValue">大值</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.IsBetween``1(``0,``0,``0,System.Boolean,System.Boolean)">
+            <summary>
+            判断值是否在范围内
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.MathEx.InRange``1(``0,``0,``0,``0)">
+            <summary>
+            判断值是否在范围内，在范围内返回原值value，不在返回默认值defaultValue
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="value">值</param>
+            <param name="minValue">小值</param>
+            <param name="maxValue">大值</param>
+            <param name="defaultValue">默认值</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.GetLimit``1(``0,``0,``0)">
+            <summary>
+            设置值在范围内
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="value">值</param>
+            <param name="lowerLimit">下限</param>
+            <param name="upperLimit">上限</param>
+            <returns>小于下限，返回下限值；高于上限，返回上限值；否则返回原值</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.GetLowerLimit``1(``0,``0)">
+            <summary>
+            检查是否低于下限
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="value">值</param>
+            <param name="lowerLimit">下限</param>
+            <returns>低于下限则为下限值，否则返回原值</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.GetUpperLimit``1(``0,``0)">
+            <summary>
+            检查是否高于上限
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="value">值</param>
+            <param name="upperLimit">上限</param>
+            <returns>高于上限则返回上限值，否则返回原值</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.IsEven(System.Int32)">
+            <summary>
+            是否是偶数
+            </summary>
+            <param name = "value">The Value</param>
+            <returns>true or false</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.IsOdd(System.Int32)">
+            <summary>
+            是否是奇数
+            </summary>
+            <param name = "value">The Value</param>
+            <returns>true or false</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.IsEven(System.Int64)">
+            <summary>
+            	Determines whether the value is even
+            </summary>
+            <param name = "value">The Value</param>
+            <returns>true or false</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.IsOdd(System.Int64)">
+            <summary>
+            	Determines whether the value is odd
+            </summary>
+            <param name = "value">The Value</param>
+            <returns>true or false</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.ToYesNoString(System.Boolean)">
+            <summary>
+            Converts the value of this instance to its equivalent string representation (either "Yes" or "No").
+            </summary>
+            <param name="boolean">是否</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.ToTrueFalseString(System.Boolean)">
+            <summary>
+            Converts the value of this instance to its equivalent string representation (either "True" or "False").
+            </summary>
+            <param name="boolean">是否</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.ToInt(System.Boolean)">
+            <summary>
+            Converts the value in number format {1 , 0}.
+            </summary>
+            <param name="boolean">是否</param>
+            <returns>int</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.ToByte(System.Boolean)">
+            <summary>
+            Converts the value in number format {1 , 0}.
+            </summary>
+            <param name="boolean">是否</param>
+            <returns>byte</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.ToBool(System.Int32,System.Boolean)">
+            <summary>
+            Converts number format {1 , 0} to bool value.
+            </summary>
+            <param name="value">int</param>
+            <param name="Default">是否</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.ToBool(System.Byte,System.Boolean)">
+            <summary>
+            Converts number format {1 , 0} to bool value.
+            </summary>
+            <param name="value">byte</param>
+            <param name="Default">是否</param>
+            <returns>结果</returns>
+        </member>
+        <member name="F:Sunny.UI.MathEx.CHARS_BINARY">
+            <summary>
+            二进制
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.MathEx.CHARS_QUATERNARY">
+            <summary>
+            四进制
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.MathEx.CHARS_SEPTENARY">
+            <summary>
+            六进制
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.MathEx.CHARS_OCTAL">
+            <summary>
+            八进制
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.MathEx.CHARS_DECIMAL">
+            <summary>
+            十进制
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.MathEx.CHARS_DUODECIMAL">
+            <summary>
+            十二进制
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.MathEx.CHARS_HEX">
+            <summary>
+            十六进制
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.MathEx.CHARS_PUREUPPERCHAR">
+            <summary>
+            纯大写字母
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.MathEx.CHARS_PURECHAR">
+            <summary>
+            纯字母（包含大小写）
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.MathEx.CHARS_36">
+            <summary>
+            大写字母和数字
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.MathEx.CHARS_62">
+            <summary>
+            字母和数字
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.MathEx.CHARS_32">
+            <summary>
+            ULID规范的字符串表示形式的长度是确定的，共占据26个字符
+            该字母表排除了I、 L、O、U字母，目的是避免混淆和滥用
+            https://www.crockford.com/base32.html
+            </summary>
+        </member>
+        <member name="T:Sunny.UI.MathEx.Characters">
+            <summary>
+            字符串转换进制
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.MathEx.Characters.BINARY">
+            <summary>
+            二进制 "01"
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.MathEx.Characters.QUATERNARY">
+            <summary>
+            四进制 "0123"
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.MathEx.Characters.SEPTENARY">
+            <summary>
+            六进制 "012345"
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.MathEx.Characters.OCTAL">
+            <summary>
+            八进制 "01234567"
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.MathEx.Characters.DECIMAL">
+            <summary>
+            十进制 "0123456789"
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.MathEx.Characters.DUODECIMAL">
+            <summary>
+            十二进制 "0123456789MN"
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.MathEx.Characters.HEX">
+            <summary>
+            十六进制 "0123456789ABCDEF"
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.MathEx.ToNumberString(System.UInt64,Sunny.UI.MathEx.Characters)">
+            <summary>
+            数字转换为指定的进制形式字符串
+            </summary>
+            <param name="number">待转换数字</param>
+            <param name="characters">进制格式</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.ToNumberString(System.UInt64,System.String)">
+            <summary>
+            数字转换为指定的进制形式字符串
+            </summary>
+            <param name="number">待转换数字</param>
+            <param name="customCharacter">自定义进制字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.ToNumberValue(System.String,Sunny.UI.MathEx.Characters,System.String)">
+            <summary>
+            指定字符串转换为指定进制的数字形式
+            </summary>
+            <param name="str">字符串</param>
+            <param name="characters">进制格式</param>
+            <param name="customCharacter">自定义进制字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.ToNumberValue(System.String,System.String)">
+            <summary>
+            指定字符串转换为指定进制的数字形式
+            </summary>
+            <param name="str">字符串</param>
+            <param name="customCharacter">自定义进制字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.ToRMBString(System.Decimal)">
+            <summary>
+            转换人民币大小金额
+            </summary>
+            <param name="num">金额</param>
+            <returns>返回大写形式</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.GetBit(System.Byte,System.Int32)">
+            <summary>
+            获取取第index是否为1，index从0开始
+            </summary>
+            <param name="b"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.SetBit(System.Byte,System.Int32,System.Boolean)">
+            <summary>
+            value=true将第index位设为1，value=false将第index位设为0, index从0开始
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.MathEx.GetBit(System.UInt16,System.Int32)">
+            <summary>
+            获取取第index是否为1，index从0开始
+            </summary>
+            <param name="b"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.SetBit(System.UInt16,System.Int32,System.Boolean)">
+            <summary>
+            value=true将第index位设为1，value=false将第index位设为0, index从0开始
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.MathEx.GetBit(System.UInt32,System.Int32)">
+            <summary>
+            获取取第index是否为1，index从0开始
+            </summary>
+            <param name="b"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.SetBit(System.UInt32,System.Int32,System.Boolean)">
+            <summary>
+            value=true将第index位设为1，value=false将第index位设为0, index从0开始
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.MathEx.ReverseBit(System.Byte,System.Int32)">
+            <summary>
+            将第index位取反，index从0开始
+            </summary>
+            <param name="b"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.IsNan(System.Double)">
+            <summary>
+            值不为数字
+            </summary>
+            <param name="d">值</param>
+            <returns>不为数字</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.IsNan(System.Single)">
+            <summary>
+            值不为数字
+            </summary>
+            <param name="d">值</param>
+            <returns>不为数字</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.IsInfinity(System.Double)">
+            <summary>
+            值负无穷或者正无穷
+            </summary>
+            <param name="d">值</param>
+            <returns>负无穷或者正无穷</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.IsInfinity(System.Single)">
+            <summary>
+            值负无穷或者正无穷
+            </summary>
+            <param name="d">值</param>
+            <returns>负无穷或者正无穷</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.IsNanOrInfinity(System.Double)">
+            <summary>
+            值不为数字或者负无穷或者正无穷
+            </summary>
+            <param name="d">值</param>
+            <returns>不为数字或者负无穷或者正无穷</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.IsNanOrInfinity(System.Single)">
+            <summary>
+            值不为数字或者负无穷或者正无穷
+            </summary>
+            <param name="d">值</param>
+            <returns>不为数字或者负无穷或者正无穷</returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.IsIntersect(System.Drawing.Point,System.Drawing.Point,System.Drawing.Point,System.Drawing.Point)">
+            <summary>
+            判断p1,p2的连线是否与q1,q2的连线相交
+            https://www.cnblogs.com/tuyang1129/p/9390376.html
+            </summary>
+            <param name="p1"></param>
+            <param name="p2"></param>
+            <param name="q1"></param>
+            <param name="q2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.UI.MathEx.CalcY(System.Drawing.PointF,System.Drawing.PointF,System.Double)">
+            <summary>
+            两点连线计算指定X的Y值
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.MathEx.CalcX(System.Drawing.PointF,System.Drawing.PointF,System.Double)">
+            <summary>
+            两点连线计算指定Y的X值
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.MathEx.CalcY(System.Drawing.Point,System.Drawing.Point,System.Double)">
+            <summary>
+            两点连线计算指定X的Y值
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.MathEx.CalcX(System.Drawing.Point,System.Drawing.Point,System.Double)">
+            <summary>
+            两点连线计算指定Y的X值
+            </summary>
+        </member>
+        <member name="T:Sunny.UI.Net">
+            <summary>
+            网络处理类
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.Net.Ping(System.String,System.TimeSpan)">
+            <summary>
+            Ping指定的主机，返回Ping结果
+            </summary>
+            <param name="host">主机</param>
+            <param name="timeout">超时</param>
+            <returns>结果</returns>
+        </member>
+        <member name="T:Sunny.UI.Net.PingResult">
+            <summary>
+            Ping结果
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.Net.PingResult.Result">
+            <summary>
+            是否Ping成功
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.Net.PingResult.Reply">
+            <summary>
+            Ping回复
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.Net.PingResult.Host">
+            <summary>
+            主机
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.Net.PingResult.Address">
+            <summary>
+            IP地址
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.Net.PingResult.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="T:Sunny.UI.RandomEx">
+            <summary>
+            随机数扩展类
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.RandomEx.RandomLong">
+            <summary>
+            随机长整形
+            </summary>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.RandomEx.RandomPureChar(System.Int32)">
+            <summary>
+            生成随机纯字母随机字符串
+            </summary>
+            <param name="length">生成长度</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.RandomEx.RandomChars(System.Int32)">
+            <summary>
+            生成字母和数字的随机字符串
+            </summary>
+            <param name="length">长度</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.RandomEx.RandomNumber(System.Int32,System.Boolean)">
+            <summary>
+            生成随机数字
+            </summary>
+            <param name="length">生成长度</param>
+            <param name="firstCanBeZero">首字母可以为0</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.RandomEx.RandomSeed">
+            <summary>
+            随机数种子
+            </summary>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.RandomEx.NextBool">
+            <summary>
+            随机返回布尔值
+            </summary>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.RandomEx.NextEnum``1">
+            <summary>
+            随机返回枚举值
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <returns>结果</returns>
+            <exception cref="T:System.InvalidOperationException">异常</exception>
+        </member>
+        <member name="M:Sunny.UI.RandomEx.NextBytes(System.Int32)">
+            <summary>
+            随机返回字节数组
+            </summary>
+            <param name="length">长度</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.RandomEx.Next(System.Int32)">
+            <summary>
+            返回大于等于0，小于最大值的随机数
+            </summary>
+            <param name="maxValue">最大值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.UI.RandomEx.RandomChinese(System.Int32)">
+            <summary>
+            可以随机生成一个长度为2的十六进制字节数组，
+            使用GetString ()方法对其进行解码就可以得到汉字字符了。
+            不过对于生成中文汉字验证码来说，因为第15区也就是AF区以前都没有汉字，
+            只有少量符号，汉字都从第16区B0开始，并且从区位D7开始以后的汉字都是和很难见到的繁杂汉字，
+            所以这些都要排出掉。所以随机生成的汉字十六进制区位码第1位范围在B、C、D之间，
+            如果第1位是D的话，第2位区位码就不能是7以后的十六进制数。
+            在来看看区位码表发现每区的第一个位置和最后一个位置都是空的，没有汉字，
+            因此随机生成的区位码第3位如果是A的话，第4位就不能是0；第3位如果是F的话，
+            第4位就不能是F。知道了原理，随机生成中文汉字的程序也就出来了，
+            以下就是生成长度为N的随机汉字C#台代码：
+            </summary>
+            <param name="length">长度</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.RandomEx.CreateRegionCode(System.Int32)">
+            <summary>
+            此函数在汉字编码范围内随机创建含两个元素的十六进制字节数组，每个字节数组代表一个汉字，并将
+            四个字节数组存储在object数组中。
+            </summary>
+            <param name="length">代表需要产生的汉字个数</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.RandomEx.RandomChineseEx(System.Int32)">
+            <summary>
+            此函数为生成指定数目的汉字
+            </summary>
+            <param name="length">汉字数目</param>
+            <returns>所有汉字</returns>
+        </member>
+        <member name="T:Sunny.UI.StringEx">
+            <summary>
+            字符串扩展类
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.StringEx.DealPath(System.String)">
+            <summary>
+            处理文件夹名称，末尾包括目录分隔符
+            </summary>
+            <param name="dir">文件夹名称</param>
+            <returns>结果</returns>
+        </member>
+        <member name="F:Sunny.UI.StringEx.DefaultCryptString">
+            <summary>
+            默认加密密码
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.StringEx.FormatString(System.Int32)">
+            <summary>
+            浮点数的格式化字符串（例如：0.00）
+            </summary>
+            <param name="decimalPlaces">小数位数</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToBoolean(System.String,System.Boolean)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToChar(System.String,System.Char)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToDecimal(System.String,System.Decimal)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToDouble(System.String,System.Double)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToFloat(System.String,System.Single)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToSingle(System.String,System.Single)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToByte(System.String,System.Byte)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToSByte(System.String,System.SByte)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToShort(System.String,System.Int16)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToInt16(System.String,System.Int16)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToUShort(System.String,System.UInt16)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToUInt16(System.String,System.UInt16)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToInt(System.String,System.Int32)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToInt32(System.String,System.Int32)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToUInt(System.String,System.UInt32)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToUInt32(System.String,System.UInt32)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToInt64(System.String,System.Int64)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToLong(System.String,System.Int64)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToULong(System.String,System.UInt64)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToUInt64(System.String,System.UInt64)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToDateTime(System.String,System.DateTime)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToDateTime(System.String,System.String)">
+            <summary>
+            字符串转换为日期
+            </summary>
+            <param name="s">字符串</param>
+            <param name="formatString">日期格式</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToDateTimeEx(System.String,System.String,System.DateTime)">
+            <summary>
+            字符串转换为日期
+            </summary>
+            <param name="s">字符串</param>
+            <param name="formatString">日期格式，可包含的格式化字符串为：yyyy、yy、MM、dd、HH、mm、ss、fff、：、-、空格</param>
+            <param name="def">默认日期</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToGuid(System.String,System.Guid)">
+            <summary>
+            字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <param name="def">默认</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsBoolean(System.String)">
+            <summary>
+            是否是布尔字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsChar(System.String)">
+            <summary>
+            是否是Char字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsDecimal(System.String)">
+            <summary>
+            是否是Decima字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsDouble(System.String)">
+            <summary>
+            是否是Double字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsSingle(System.String)">
+            <summary>
+            是否是Float字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsFloat(System.String)">
+            <summary>
+            是否是Float字符串转换
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsByte(System.String)">
+            <summary>
+            是否是Byte字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsSByte(System.String)">
+            <summary>
+            是否是SByte字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsInt16(System.String)">
+            <summary>
+            是否是Short字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsShort(System.String)">
+            <summary>
+            是否是Short字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsUInt16(System.String)">
+            <summary>
+            是否是UShort字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsUShort(System.String)">
+            <summary>
+            是否是UShort字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsInt32(System.String)">
+            <summary>
+            是否是Int字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsInt(System.String)">
+            <summary>
+            是否是Int字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsUInt32(System.String)">
+            <summary>
+            是否是UInt字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsUInt(System.String)">
+            <summary>
+            是否是UInt字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsInt64(System.String)">
+            <summary>
+            是否是Long字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsLong(System.String)">
+            <summary>
+            是否是Long字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsUInt64(System.String)">
+            <summary>
+            是否是ULong字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsULong(System.String)">
+            <summary>
+            是否是ULong字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsDateTime(System.String)">
+            <summary>
+            是否是日期字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsGuid(System.String)">
+            <summary>
+            是否是Guid字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.Repeat(System.String,System.Int32)">
+            <summary>
+            字符串重复显示
+            </summary>
+            <param name="str">The string.</param>
+            <param name="count">The count.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.Left(System.String,System.Int32)">
+            <summary>
+            字符串左侧按长度截取后的字符串
+            </summary>
+            <param name="s">字符串</param>
+            <param name="length">长度</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.Middle(System.String,System.Int32,System.Int32)">
+            <summary>
+            字符串中间按长度截取后的字符串
+            </summary>
+            <param name="s">字符串</param>
+            <param name="start">开始</param>
+            <param name="length">长度</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsNullOrEmpty(System.String)">
+            <summary>
+            指示指定的字符串是 null还是 Empty 字符串。
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsValid(System.String)">
+            <summary>
+            指示指定的字符串是 null还是 Empty 字符串。
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.TrimToMaxLength(System.String,System.Int32)">
+            <summary>
+            截取指定长度的字符串
+            </summary>
+            <param name="value">字符串</param>
+            <param name="maxLength">长度</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsNullOrWhiteSpace(System.String)">
+            <summary>
+            指示指定的字符串是 null、空还是仅由空白字符组成。
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.Right(System.String,System.Int32)">
+            <summary>
+            字符串右侧按长度截取后的字符串
+            </summary>
+            <param name="s">字符串</param>
+            <param name="length">长度</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsNumber(System.String)">
+            <summary>
+            是否数字字符串
+            </summary>
+            <param name="s">输入字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsNumberWithSign(System.String)">
+            <summary>
+            是否数字字符串 可带正负号
+            </summary>
+            <param name="s">输入字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.HasCnChar(System.String)">
+            <summary>
+            检测是否有中文字符
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.Md5String(System.String)">
+            <summary>
+            使用utf8编码将字符串散列
+            </summary>
+            <param name="s">要散列的字符串</param>
+            <returns>散列后的字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.Md5String(System.String,System.Text.Encoding)">
+            <summary>
+            使用指定的编码将字符串散列
+            </summary>
+            <param name="s">要散列的字符串</param>
+            <param name="encoding">编码</param>
+            <returns>散列后的字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.DesEncrypt(System.String,System.String)">
+            <summary>
+            DES加密
+            </summary>
+            <param name="s">待加密字符串</param>
+            <param name="key">密钥</param>
+            <returns>加密后的字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.DesDecrypt(System.String,System.String)">
+            <summary>
+            DES解密
+            </summary>
+            <param name="s">待解密字符串</param>
+            <param name="key">密钥</param>
+            <returns>解密后的字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsIPv4(System.String)">
+            <summary>
+            IP地址是否为IPv4
+            </summary>
+            <param name="s">IP地址</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsIP4(System.String)">
+            <summary>
+            字符串是否为IP地址
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.Split(System.String,System.String,System.Boolean)">
+            <summary>
+            分割字符串
+            </summary>
+            <param name="s">字符串</param>
+            <param name="separator">分隔符</param>
+            <param name="ignoreEmpty">忽略空字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.SplitSeparatorCount(System.String,System.String)">
+            <summary>
+            字符串包含分隔符的个数
+            </summary>
+            <param name="s">字符串</param>
+            <param name="separator">分隔符</param>
+            <returns>个数</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.SplitLast(System.String,System.String,System.Boolean)">
+            <summary>
+            以分隔符分割后的最后一个字符串
+            </summary>
+            <param name="s">字符串</param>
+            <param name="separator">分隔符</param>
+            <param name="ignoreEmpty">忽略空字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.SplitFirst(System.String,System.String,System.Boolean)">
+            <summary>
+            以分隔符分割后的第一个字符串
+            </summary>
+            <param name="s">字符串</param>
+            <param name="separator">分隔符</param>
+            <param name="ignoreEmpty">忽略空字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.SplitIndex(System.String,System.String,System.Int32,System.Boolean)">
+            <summary>
+            返回字符串分割后指定索引的字符串
+            </summary>
+            <param name="s">字符串</param>
+            <param name="separator">分隔符</param>
+            <param name="index">索引</param>
+            <param name="ignoreEmpty">忽略空字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.SplitBeforeLast(System.String,System.String)">
+            <summary>
+            以分隔符分割的最后一个字符串之前的字符串
+            </summary>
+            <param name="s">字符串</param>
+            <param name="separator">分隔符</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsMail(System.String)">
+            <summary>
+            检测输入的邮件地址是否合法，非法则返回true。
+            </summary>
+            <param name="s">邮件</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToEnBytes(System.String,System.Int32)">
+            <summary>
+            英文字符串转换为ASCII编码的数组
+            </summary>
+            <param name="s">字符串</param>
+            <param name="len">长度</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToEnString(System.Byte[])">
+            <summary>
+            ASCII编码的数组转换为英文字符串
+            </summary>
+            <param name="s">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToEncodeBytes(System.String,System.Text.Encoding)">
+            <summary>
+            字符串按指定编码转换为数组
+            </summary>
+            <param name="dealString">字符串</param>
+            <param name="encoding">编码</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToEncodeString(System.Byte[],System.Text.Encoding)">
+            <summary>
+            数组按指定编码转换为字符串
+            </summary>
+            <param name="dealBytes">数组</param>
+            <param name="encoding">编码</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.Between(System.String,System.String,System.String)">
+            <summary>
+            	Gets the string between the given string parameters.
+            </summary>
+            <param name = "value">The source value.</param>
+            <param name = "x">The left string sentinel.</param>
+            <param name = "y">The right string sentinel</param>
+            <returns>结果</returns>
+            <remarks>Unlike GetBefore, this method trims the result</remarks>
+        </member>
+        <member name="M:Sunny.UI.StringEx.Base64Encode(System.String)">
+            <summary>
+            	Encodes the input value to a Base64 string using the default encoding.
+            </summary>
+            <param name = "value">The input value.</param>
+            <returns>The Base 64 encoded string</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.Base64Encode(System.String,System.Text.Encoding)">
+            <summary>
+            	Encodes the input value to a Base64 string using the supplied encoding.
+            </summary>
+            <param name = "value">The input value.</param>
+            <param name = "encoding">The encoding.</param>
+            <returns>The Base 64 encoded string</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.Base64Decode(System.String)">
+            <summary>
+            	Decodes a Base 64 encoded value to a string using the default encoding.
+            </summary>
+            <param name = "encodedValue">The Base 64 encoded value.</param>
+            <returns>The decoded string</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.Base64Decode(System.String,System.Text.Encoding)">
+            <summary>
+            	Decodes a Base 64 encoded value to a string using the supplied encoding.
+            </summary>
+            <param name = "encodedValue">The Base 64 encoded value.</param>
+            <param name = "encoding">The encoding.</param>
+            <returns>The decoded string</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.SHA1Hash(System.String)">
+            <summary>
+            Calculates the SHA1 hash of the supplied string and returns a base 64 string.
+            </summary>
+            <param name="stringToHash">String that must be hashed.</param>
+            <returns>The hashed string or null if hashing failed.</returns>
+            <exception cref="T:System.ArgumentException">Occurs when stringToHash or key is null or empty.</exception>
+        </member>
+        <member name="M:Sunny.UI.StringEx.RemoveLeft(System.String,System.Int32)">
+            <summary>
+            Return the string with the leftmost number_of_characters characters removed.
+            </summary>
+            <param name="str">The string being extended</param>
+            <param name="number_of_characters">The number of characters to remove.</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.RemoveRight(System.String,System.Int32)">
+            <summary>
+            Return the string with the rightmost number_of_characters characters removed.
+            </summary>
+            <param name="str">The string being extended</param>
+            <param name="number_of_characters">The number of characters to remove.</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.GZipCompress(System.String)">
+            <summary>
+            压缩字符串
+            </summary>
+            <param name="input">输入</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.GZipDecompress(System.String)">
+            <summary>
+            解压缩字符串
+            </summary>
+            <param name="input">输入</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsPureEnglishChar(System.String)">
+            <summary>
+            是否是纯英文字母
+            </summary>
+            <param name="str">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.IsNameSpace(System.String)">
+            <summary>
+            是否是命名空间
+            </summary>
+            <param name="str">字符串</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToSBC(System.String)">
+            <summary>
+            转全角(SBC case)
+            </summary>
+            <param name="input">任意字符串</param>
+            <returns>全角字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.StringEx.ToDBC(System.String)">
+            <summary>
+            转半角(DBC case)
+            </summary>
+            <param name="input">任意字符串</param>
+            <returns>半角字符串</returns>
+        </member>
+        <member name="T:Sunny.UI.IStructFile">
+            <summary>
+            结构文件接口
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.IStructFile.Init">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.IStructFile.FileName">
+            <summary>
+            文件名
+            </summary>
+            <returns>文件名</returns>
+        </member>
+        <member name="T:Sunny.UI.StructEx">
+            <summary>
+            结构体扩展类
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.StructEx.StructLayoutString">
+            <summary>
+            结构序列化字符串
+            [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1)]
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.StructEx.StructMarshalAs">
+            <summary>
+            结构序列化字符串数组长度
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 128)]
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.StructEx.ToStruct``1(System.Byte[])">
+            <summary>
+            字节数组转为值类型的对象
+            </summary>
+            <typeparam name="T">值类型</typeparam>
+            <param name="bytes">字节数组</param>
+            <returns>对象</returns>
+        </member>
+        <member name="M:Sunny.UI.StructEx.Size``1(``0)">
+            <summary>
+            值类型对象长度
+            </summary>
+            <typeparam name="T">T</typeparam>
+            <param name="obj">obj</param>
+            <returns>长度</returns>
+        </member>
+        <member name="M:Sunny.UI.StructEx.ToBytes``1(``0)">
+            <summary>
+            值类型的对象转换为字节数组
+            </summary>
+            <typeparam name="T">值类型</typeparam>
+            <param name="obj">对象</param>
+            <returns>字节数组</returns>
+        </member>
+        <member name="M:Sunny.UI.StructEx.Load``1(``0@,System.String,System.String)">
+            <summary>
+            从文件加载结构体数据
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.StructEx.Save``1(``0,System.String,System.String)">
+            <summary>
+            保存结构体数据到文件
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.StructEx.Clone``1(``0)">
+            <summary>
+            克隆结构体对象
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.StructEx.PrintStruct``1">
+            <summary>
+            打印结构体信息
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <returns>结果</returns>
+        </member>
+        <member name="T:Sunny.UI.BackgroundWorkerEx">
+            <summary>
+            多线程运行扩展类
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.BackgroundWorkerEx.RunOnce">
+            <summary>
+            是否只运行一次
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.BackgroundWorkerEx.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.BackgroundWorkerEx.IsStart">
+            <summary>
+            是否运行
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.BackgroundWorkerEx.WorkerDelay">
+            <summary>
+            每次运行时间间隔
+            </summary>
+        </member>
+        <member name="E:Sunny.UI.BackgroundWorkerEx.OnCompleted">
+            <summary>
+            运行结束调用事件
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.BackgroundWorkerEx.DoWorker">
+            <summary>
+            运行事件，需重载
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.BackgroundWorkerEx.DoCompleted">
+            <summary>
+            运行结束
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.BackgroundWorkerEx.InitStart">
+            <summary>
+            运行前调用
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.BackgroundWorkerEx.FinalStop">
+            <summary>
+            停止后调用
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.BackgroundWorkerEx.BeforeStop">
+            <summary>
+            停止前调用
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.BackgroundWorkerEx.Start">
+            <summary>
+            开始运行线程
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.BackgroundWorkerEx.Stop">
+            <summary>
+            结束运行线程
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.BackgroundWorkerEx.Dispose(System.Boolean)">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="T:Sunny.UI.ConcurrentDoubleKeyDictionary`2">
+            <summary>
+            双主键线程安全字典
+            </summary>
+            <typeparam name="TKey1">主键1</typeparam>
+            <typeparam name="TKey2">主键2</typeparam>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentDoubleKeyDictionary`2.Upsert(`0,`1)">
+            <summary>
+            插入或更新键值对
+            </summary>
+            <param name="key1">键1</param>
+            <param name="key2">键2</param>
+        </member>
+        <member name="P:Sunny.UI.ConcurrentDoubleKeyDictionary`2.Item(`0)">
+            <summary>
+            根据键1获取或设置键2
+            </summary>
+            <param name="key1">键1</param>
+            <returns>键2</returns>
+        </member>
+        <member name="P:Sunny.UI.ConcurrentDoubleKeyDictionary`2.Count">
+            <summary>
+            获取字典中的元素数量
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentDoubleKeyDictionary`2.RemoveByKey1(`0)">
+            <summary>
+            根据键1移除键值对
+            </summary>
+            <param name="key1">键1</param>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentDoubleKeyDictionary`2.RemoveByKey2(`1)">
+            <summary>
+            根据键2移除键值对
+            </summary>
+            <param name="key2">键2</param>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentDoubleKeyDictionary`2.GetKey2(`0)">
+            <summary>
+            根据键1获取键2
+            </summary>
+            <param name="key1">键1</param>
+            <returns>键2，如果不存在则返回默认值</returns>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentDoubleKeyDictionary`2.GetKey1(`1)">
+            <summary>
+            根据键2获取键1
+            </summary>
+            <param name="key2">键2</param>
+            <returns>键1，如果不存在则返回默认值</returns>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentDoubleKeyDictionary`2.ContainsKey1(`0)">
+            <summary>
+            检查是否包含键1
+            </summary>
+            <param name="key1">键1</param>
+            <returns>true如果包含，否则false</returns>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentDoubleKeyDictionary`2.ContainsKey2(`1)">
+            <summary>
+            检查是否包含键2
+            </summary>
+            <param name="key2">键2</param>
+            <returns>true如果包含，否则false</returns>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentDoubleKeyDictionary`2.Key1List">
+            <summary>
+            获取所有键1的列表
+            </summary>
+            <returns>键1的列表</returns>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentDoubleKeyDictionary`2.Key2List">
+            <summary>
+            获取所有键2的列表
+            </summary>
+            <returns>键2的列表</returns>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentDoubleKeyDictionary`2.Clear">
+            <summary>
+            清空字典
+            </summary>
+        </member>
+        <member name="T:Sunny.UI.ConcurrentGroupDictionary`3">
+            <summary>
+            分组线程安全字典
+            </summary>
+            <typeparam name="TGroup">组名</typeparam>
+            <typeparam name="TKey">主键</typeparam>
+            <typeparam name="TValue">键值</typeparam>
+        </member>
+        <member name="P:Sunny.UI.ConcurrentGroupDictionary`3.Item(`0)">
+            <summary>
+            根据组名获取或设置该组的字典
+            </summary>
+            <param name="group">组名</param>
+            <returns>该组的字典</returns>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentGroupDictionary`3.ContainsGroup(`0)">
+            <summary>
+            检查是否包含指定的组
+            </summary>
+            <param name="group">组名</param>
+            <returns>true如果包含，否则false</returns>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentGroupDictionary`3.ContainsKey(`1)">
+            <summary>
+            检查是否包含指定的键（在任意组中）
+            </summary>
+            <param name="key">键</param>
+            <returns>true如果包含，否则false</returns>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentGroupDictionary`3.ContainsKey(`0,`1)">
+            <summary>
+            检查指定组中是否包含指定的键
+            </summary>
+            <param name="group">组名</param>
+            <param name="key">键</param>
+            <returns>true如果包含，否则false</returns>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentGroupDictionary`3.TryAdd(`0)">
+            <summary>
+            尝试添加一个新组
+            </summary>
+            <param name="group">组名</param>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentGroupDictionary`3.TryAdd(`0,`1,`2)">
+            <summary>
+            尝试在指定组中添加或更新键值对
+            </summary>
+            <param name="group">组名</param>
+            <param name="key">键</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentGroupDictionary`3.TryUpdate(`0,`1,`2)">
+            <summary>
+            尝试更新指定组中的键值对
+            </summary>
+            <param name="group">组名</param>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <returns>true如果更新成功，否则false</returns>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentGroupDictionary`3.TryRemove(`0,`1)">
+            <summary>
+            尝试从指定组中移除键值对
+            </summary>
+            <param name="group">组名</param>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentGroupDictionary`3.TryRemove(`0)">
+            <summary>
+            尝试移除指定的组
+            </summary>
+            <param name="group">组名</param>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentGroupDictionary`3.Clear">
+            <summary>
+            清空整个字典
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentGroupDictionary`3.ClearGroup(`0)">
+            <summary>
+            清空指定组
+            </summary>
+            <param name="group">组名</param>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentGroupDictionary`3.Values(`0)">
+            <summary>
+            获取指定组的所有值
+            </summary>
+            <param name="group">组名</param>
+            <returns>值的列表</returns>
+        </member>
+        <member name="P:Sunny.UI.ConcurrentGroupDictionary`3.Groups">
+            <summary>
+            获取所有组名的列表
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.ConcurrentGroupDictionary`3.SortedGroups">
+            <summary>
+            获取排序后的所有组名的列表
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentGroupDictionary`3.Keys(`0)">
+            <summary>
+            获取指定组的所有键
+            </summary>
+            <param name="group">组名</param>
+            <returns>键的列表</returns>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentGroupDictionary`3.SortedKeys(`0)">
+            <summary>
+            获取指定组排序后的所有键
+            </summary>
+            <param name="group">组名</param>
+            <returns>排序后的键的列表</returns>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentGroupDictionary`3.SortedValues(`0)">
+            <summary>
+            获取指定组排序后的所有值
+            </summary>
+            <param name="group">组名</param>
+            <returns>排序后的值的列表</returns>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentGroupDictionary`3.GetValue(`0,`1)">
+            <summary>
+            获取指定组中指定键的值
+            </summary>
+            <param name="group">组名</param>
+            <param name="key">键</param>
+            <returns>值，如果不存在则返回默认值</returns>
+        </member>
+        <member name="P:Sunny.UI.ConcurrentGroupDictionary`3.AllCount">
+            <summary>
+            获取整个字典中所有元素的总数
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.ConcurrentGroupDictionary`3.GroupCount">
+            <summary>
+            获取组的数量
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentGroupDictionary`3.GroupItemsCount(`0)">
+            <summary>
+            获取指定组中元素的数量
+            </summary>
+            <param name="group">组名</param>
+            <returns>元素的数量</returns>
+        </member>
+        <member name="T:Sunny.UI.Crc32">
+            <summary>
+            CRC32校验类
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.Crc32.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.Crc32.#ctor(System.UInt32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="poly">poly</param>
+        </member>
+        <member name="M:Sunny.UI.Crc32.ComputeHash(System.String)">
+            <summary>
+            计算哈希值
+            </summary>
+            <param name="text">文本</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.Crc32.ComputeHash(System.Byte[])">
+            <summary>
+            计算哈希值
+            </summary>
+            <param name="data">数组</param>
+            <returns>哈希值</returns>
+        </member>
+        <member name="M:Sunny.UI.Crc32.ComputeHash(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            计算哈希值
+            </summary>
+            <param name="data">数据</param>
+            <param name="start">起始位置</param>
+            <param name="length">长度</param>
+            <returns>哈希值</returns>
+        </member>
+        <member name="M:Sunny.UI.Crc32.ComputeHash``1(``0,System.Int32,System.Int32)">
+            <summary>
+            计算哈希值
+            </summary>
+            <param name="data">数据</param>
+            <param name="start">起始位置</param>
+            <param name="length">长度</param>
+            <typeparam name="T">类型</typeparam>
+            <returns>哈希值</returns>
+        </member>
+        <member name="T:Sunny.UI.Adler32">
+            <summary>
+            Adler32校验类
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.Adler32.ComputeHash(System.Byte[],System.Int32,System.Int32)">
+            <summary>Performs the hash algorithm on given data array.</summary>
+            <param name="bytesArray">Input data.</param>
+            <param name="byteStart">The position to begin reading from.</param>
+            <param name="bytesToRead">How many bytes in the bytesArray to read.</param>
+        </member>
+        <member name="T:Sunny.UI.IDisposableObject">
+            <summary>
+            释放对象接口
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.IDisposableObject.IsDisposed">
+            <summary>
+            是否释放标志
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.IDisposableObject.ThrowIfDisposed">
+            <summary>
+            判断是否已经被释放，如果是，则抛出异常。
+            </summary>
+        </member>
+        <member name="T:Sunny.UI.DisposableObject">
+            <summary>
+            释放对象基类
+            继承的子类可以实现析构函数，因为析构函数不能重载
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.DisposableObject._disposed">
+            <summary>
+            是否释放标志
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.DisposableObject.IsDisposed">
+            <summary>
+            保证重复释放资源时，不重复释放
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.DisposableObject.ThrowIfDisposed">
+            <summary>
+            判断是否已经被释放，如果是，则抛出异常。
+            </summary>
+            <exception cref="T:System.ObjectDisposedException"></exception>
+        </member>
+        <member name="M:Sunny.UI.DisposableObject.Dispose(System.Boolean)">
+            <summary>
+            释放对象
+            </summary>
+            <param name="disposing">ture时一般位主动调用释放，false一般为GC调用析构函数时释放</param>
+        </member>
+        <member name="M:Sunny.UI.DisposableObject.Dispose">
+            <summary>
+            实现IDisposable中的Dispose方法
+            外部手动调用或者在using中自动调用，同时释放托管资源和非托管资源
+            </summary>
+        </member>
+        <member name="T:Sunny.UI.HotCache`2">
+            <summary>
+            热缓存类
+            </summary>
+            <typeparam name="TKey">主键</typeparam>
+            <typeparam name="TValue">键值</typeparam>
+        </member>
+        <member name="M:Sunny.UI.HotCache`2.DoWorker">
+            <summary>
+            执行后台工作，清理过期缓存项
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.HotCache`2.BeforeStop">
+            <summary>
+            停止前清理缓存
+            </summary>
+        </member>
+        <member name="E:Sunny.UI.HotCache`2.OnCacheChanged">
+            <summary>
+            缓存改变事件
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.HotCache`2.AliveMinutes">
+            <summary>
+            对象存活时间（分钟）。如果一个对象在 AliveMinutes 时间间隔内都不被访问，则将被从缓存中清除。
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.HotCache`2.Cache">
+            <summary>
+            缓存字典
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.HotCache`2.ContainsKey(`0)">
+            <summary>
+            检查是否包含指定的键
+            </summary>
+            <param name="key">键</param>
+            <returns>true如果包含，否则false</returns>
+        </member>
+        <member name="M:Sunny.UI.HotCache`2.Add(`0,`1)">
+            <summary>
+            添加键值对到缓存
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:Sunny.UI.HotCache`2.Remove(`0)">
+            <summary>
+            从缓存中移除指定的键
+            </summary>
+            <param name="key">键</param>
+        </member>
+        <member name="M:Sunny.UI.HotCache`2.Clear">
+            <summary>
+            清空缓存
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.HotCache`2.Get(`0)">
+            <summary>
+            获取指定键的值
+            </summary>
+            <param name="key">键</param>
+            <returns>值，如果不存在则返回null</returns>
+        </member>
+        <member name="P:Sunny.UI.HotCache`2.LastAccessTime">
+            <summary>
+            最后访问时间
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.HotCache`2.HotCacheItemCreator">
+            <summary>
+            缓存项创建器
+            </summary>
+        </member>
+        <member name="T:Sunny.UI.IHotCacheItemCreator`2">
+            <summary>
+            热缓存项创建器接口
+            </summary>
+            <typeparam name="TKey">主键</typeparam>
+            <typeparam name="TValue">键值</typeparam>
+        </member>
+        <member name="M:Sunny.UI.IHotCacheItemCreator`2.Run(`0)">
+            <summary>
+            创建缓存项
+            </summary>
+            <param name="key">键</param>
+            <returns>值</returns>
+        </member>
+        <member name="T:Sunny.UI.HotCacheItem`2">
+            <summary>
+            热缓存项
+            </summary>
+            <typeparam name="TKey">主键</typeparam>
+            <typeparam name="TValue">键值</typeparam>
+        </member>
+        <member name="M:Sunny.UI.HotCacheItem`2.#ctor(`0,`1)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+        </member>
+        <member name="P:Sunny.UI.HotCacheItem`2.Key">
+            <summary>
+            键
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.HotCacheItem`2.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.HotCacheItem`2.LastAccessTime">
+            <summary>
+            最后访问时间
+            </summary>
+        </member>
+        <member name="T:Sunny.UI.IdentityCard">
+            <summary>
+            身份证校验类
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.IdentityCard.Birthday">
+            <summary>
+            生日
+            </summary>
+        </member>
+        <member name="T:Sunny.UI.IdentityCard.SexType">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.IdentityCard.SexType.Man">
+            <summary>
+            男
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.IdentityCard.SexType.Woman">
+            <summary>
+            女
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.IdentityCard.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.IdentityCard.IsOld">
+            <summary>
+            是否15位旧卡
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.IdentityCard.AreaNum">
+            <summary>
+            地区编码
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.IdentityCard.Valid(System.String)">
+            <summary>
+            验证身份证是否合法
+            </summary>
+            <param name="card">The card.</param>
+            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:Sunny.UI.IdentityCard.Parse(System.String)">
+            <summary>
+            使用身份证号码初始化
+            </summary>
+            <param name="card">The card.</param>
+            <returns>IdentityCard.</returns>
+        </member>
+        <member name="T:Sunny.UI.UIObjectCollection">
+            <summary>
+            对象集合类
+            </summary>
+        </member>
+        <member name="E:Sunny.UI.UIObjectCollection.CountChange">
+            <summary>
+            数量改变事件
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.UIObjectCollection.Item(System.Int32)">
+            <summary>
+            根据索引获取或设置对象
+            </summary>
+            <param name="index">索引</param>
+            <returns>对象</returns>
+        </member>
+        <member name="P:Sunny.UI.UIObjectCollection.Count">
+            <summary>
+            获取集合中的对象数量
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.UIObjectCollection.System#Collections#IList#IsReadOnly">
+            <summary>
+            获取是否为只读
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.UIObjectCollection.System#Collections#IList#IsFixedSize">
+            <summary>
+            获取是否为固定大小
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.UIObjectCollection.Add(System.Object)">
+            <summary>
+            添加对象到集合
+            </summary>
+            <param name="value">要添加的对象</param>
+            <returns>添加的索引</returns>
+        </member>
+        <member name="M:Sunny.UI.UIObjectCollection.AddRange(System.Object[])">
+            <summary>
+            添加对象数组到集合
+            </summary>
+            <param name="value">要添加的对象数组</param>
+        </member>
+        <member name="M:Sunny.UI.UIObjectCollection.Clear">
+            <summary>
+            清空集合
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.UIObjectCollection.Contains(System.Object)">
+            <summary>
+            检查集合是否包含指定对象
+            </summary>
+            <param name="value">要检查的对象</param>
+            <returns>true如果包含，否则false</returns>
+        </member>
+        <member name="M:Sunny.UI.UIObjectCollection.CopyTo(System.Object[],System.Int32)">
+            <summary>
+            将集合复制到数组
+            </summary>
+            <param name="array">目标数组</param>
+            <param name="index">起始索引</param>
+        </member>
+        <member name="M:Sunny.UI.UIObjectCollection.GetEnumerator">
+            <summary>
+            获取枚举器
+            </summary>
+            <returns>UIObjectEnumerator 实例</returns>
+        </member>
+        <member name="M:Sunny.UI.UIObjectCollection.IndexOf(System.Object)">
+            <summary>
+            获取指定对象的索引
+            </summary>
+            <param name="value">要查找的对象</param>
+            <returns>索引，如果不存在则返回-1</returns>
+        </member>
+        <member name="M:Sunny.UI.UIObjectCollection.Insert(System.Int32,System.Object)">
+            <summary>
+            在指定索引处插入对象
+            </summary>
+            <param name="index">索引</param>
+            <param name="value">要插入的对象</param>
+        </member>
+        <member name="P:Sunny.UI.UIObjectCollection.IsReadOnly">
+            <summary>
+            获取是否为只读
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.UIObjectCollection.IsSynchronized">
+            <summary>
+            获取是否为同步
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.UIObjectCollection.Remove(System.Object)">
+            <summary>
+            从集合中移除指定对象
+            </summary>
+            <param name="value">要移除的对象</param>
+        </member>
+        <member name="M:Sunny.UI.UIObjectCollection.RemoveAt(System.Int32)">
+            <summary>
+            移除指定索引处的对象
+            </summary>
+            <param name="index">索引</param>
+        </member>
+        <member name="P:Sunny.UI.UIObjectCollection.SyncRoot">
+            <summary>
+            获取同步根对象
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.UIObjectCollection.System#Collections#IList#Item(System.Int32)">
+            <summary>
+            根据索引获取或设置对象（IList 接口实现）
+            </summary>
+            <param name="index">索引</param>
+            <returns>对象</returns>
+        </member>
+        <member name="M:Sunny.UI.UIObjectCollection.System#Collections#IList#Add(System.Object)">
+            <summary>
+            添加对象到集合（IList 接口实现）
+            </summary>
+            <param name="value">要添加的对象</param>
+            <returns>添加的索引</returns>
+        </member>
+        <member name="M:Sunny.UI.UIObjectCollection.System#Collections#IList#Contains(System.Object)">
+            <summary>
+            检查集合是否包含指定对象（IList 接口实现）
+            </summary>
+            <param name="value">要检查的对象</param>
+            <returns>true如果包含，否则false</returns>
+        </member>
+        <member name="M:Sunny.UI.UIObjectCollection.System#Collections#IList#IndexOf(System.Object)">
+            <summary>
+            获取指定对象的索引（IList 接口实现）
+            </summary>
+            <param name="value">要查找的对象</param>
+            <returns>索引，如果不存在则返回-1</returns>
+        </member>
+        <member name="M:Sunny.UI.UIObjectCollection.System#Collections#IList#Insert(System.Int32,System.Object)">
+            <summary>
+            在指定索引处插入对象（IList 接口实现）
+            </summary>
+            <param name="index">索引</param>
+            <param name="value">要插入的对象</param>
+        </member>
+        <member name="M:Sunny.UI.UIObjectCollection.System#Collections#IList#Remove(System.Object)">
+            <summary>
+            从集合中移除指定对象（IList 接口实现）
+            </summary>
+            <param name="value">要移除的对象</param>
+        </member>
+        <member name="M:Sunny.UI.UIObjectCollection.System#Collections#ICollection#CopyTo(System.Array,System.Int32)">
+            <summary>
+            将集合复制到数组（ICollection 接口实现）
+            </summary>
+            <param name="array">目标数组</param>
+            <param name="index">起始索引</param>
+        </member>
+        <member name="M:Sunny.UI.UIObjectCollection.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            获取枚举器（IEnumerable 接口实现）
+            </summary>
+            <returns>枚举器</returns>
+        </member>
+        <member name="T:Sunny.UI.UIObjectEnumerator">
+            <summary>
+            UI 对象枚举器
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.UIObjectEnumerator.#ctor(Sunny.UI.UIObjectCollection)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="mappings">UIObjectCollection 实例</param>
+        </member>
+        <member name="P:Sunny.UI.UIObjectEnumerator.Current">
+            <summary>
+            获取当前对象
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.UIObjectEnumerator.MoveNext">
+            <summary>
+            移动到下一个对象
+            </summary>
+            <returns>true如果移动成功，否则false</returns>
+        </member>
+        <member name="M:Sunny.UI.UIObjectEnumerator.Reset">
+            <summary>
+            重置枚举器
+            </summary>
+        </member>
+        <member name="T:Sunny.UI.KeyScope">
+            <summary>
+            KeyScope 用于表示一个整数范围。显示为：3..12
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.KeyScope.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.KeyScope.#ctor(System.Int32,System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="theMin">最小值</param>
+            <param name="theMax">最大值</param>
+        </member>
+        <member name="M:Sunny.UI.KeyScope.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="scopeStr">字符串，以逗号分隔</param>
+        </member>
+        <member name="P:Sunny.UI.KeyScope.ScopeString">
+            <summary>
+            ScopeString 以..分隔，如"10..1000"
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.KeyScope.Max">
+            <summary>
+            最大值
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.KeyScope.Min">
+            <summary>
+            最小值
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.KeyScope.Contains(System.Int32)">
+            <summary>
+            包含
+            </summary>
+            <param name="val">整数</param>
+            <returns>是否包含</returns>
+        </member>
+        <member name="M:Sunny.UI.KeyScope.Contains(Sunny.UI.KeyScope)">
+            <summary>
+            包含
+            </summary>
+            <param name="scope">范围</param>
+            <returns>是否包含</returns>
+        </member>
+        <member name="M:Sunny.UI.KeyScope.Intersect(Sunny.UI.KeyScope)">
+            <summary>
+            交叉
+            </summary>
+            <param name="scope">范围</param>
+            <returns>是否交叉</returns>
+        </member>
+        <member name="M:Sunny.UI.KeyScope.ToString">
+            <summary>
+            字符串
+            </summary>
+            <returns>字符串</returns>
+        </member>
+        <member name="T:Sunny.UI.KeyScopes">
+            <summary>
+            KeyScopes 用于表示多个整数范围和一组离散的整数值
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.KeyScopes.Min">
+            <summary>
+            最小值
+            </summary>
+            <returns>最小值</returns>
+        </member>
+        <member name="P:Sunny.UI.KeyScopes.Max">
+            <summary>
+            最大值
+            </summary>
+            <returns>最大值</returns>
+        </member>
+        <member name="M:Sunny.UI.KeyScopes.Add(System.Int32)">
+            <summary>
+            增加
+            </summary>
+            <param name="value">值</param>
+        </member>
+        <member name="M:Sunny.UI.KeyScopes.Add(Sunny.UI.KeyScope)">
+            <summary>
+            增加
+            </summary>
+            <param name="value">值</param>
+        </member>
+        <member name="M:Sunny.UI.KeyScopes.Add(System.String)">
+            <summary>
+            增加
+            </summary>
+            <param name="value">值，以..分隔的字符串</param>
+        </member>
+        <member name="M:Sunny.UI.KeyScopes.Contains(System.Int32)">
+            <summary>
+            包含
+            </summary>
+            <param name="value">整数</param>
+            <returns>是否包含</returns>
+        </member>
+        <member name="M:Sunny.UI.KeyScopes.ToString">
+            <summary>
+            字符串
+            </summary>
+            <returns>字符串</returns>
+        </member>
+        <member name="T:Sunny.UI.LimitedQueue`1">
+            <summary>
+            表示固定长度的对象的先进先出集合。
+            </summary>
+            <typeparam name="T">指定队列中元素的类型。</typeparam>
+        </member>
+        <member name="P:Sunny.UI.LimitedQueue`1.Limit">
+            <summary>
+            队列长度
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.LimitedQueue`1.#ctor(System.Int32)">
+            <summary>
+            定长队列
+            </summary>
+            <param name="limit"></param>
+        </member>
+        <member name="M:Sunny.UI.LimitedQueue`1.Enqueue(`0)">
+            <summary>
+            入队
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="T:Sunny.UI.ConcurrentLimitedQueue`1">
+            <summary>
+            表示固定长度的线程安全的先进先出 (FIFO) 集合。
+            </summary>
+            <typeparam name="T">队列中包含的元素的类型。</typeparam>
+        </member>
+        <member name="P:Sunny.UI.ConcurrentLimitedQueue`1.Limit">
+            <summary>
+            长度
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentLimitedQueue`1.#ctor(System.Int32)">
+            <summary>
+            定长队列
+            </summary>
+            <param name="limit"></param>
+        </member>
+        <member name="M:Sunny.UI.ConcurrentLimitedQueue`1.Enqueue(`0)">
+            <summary>
+            入队
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="T:Sunny.UI.ListEx`1">
+            <summary>
+            支持事件的List
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="E:Sunny.UI.ListEx`1.OnDelete">
+            <summary>
+            删除事件
+            </summary>
+        </member>
+        <member name="E:Sunny.UI.ListEx`1.OnAppend">
+            <summary>
+            添加事件
+            </summary>
+        </member>
+        <member name="T:Sunny.UI.LogFile">
+            <summary>
+            日志文件记录类
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.LogFile.Level">
+            <summary>
+            日子级别
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.LogFile.LogDebugInfo">
+            <summary>
+            记录调试信息
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.LogFile.UseThread">
+            <summary>
+            使用多线程保存
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.LogFile.DateTimeFormat">
+            <summary>
+            日志时间格式
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.LogFile.FileNamePrefix">
+            <summary>
+            获取或设置日志文件的名称
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.LogFile.FilePath">
+            <summary>
+            获取或设置日志文件的路径
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.LogFile.MaxFileSize">
+            <summary>
+            获取或设置定义日志文件大小
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.LogFile.#ctor">
+            <summary>
+            默认构造函数,初始化日志文件大小[2M]
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.LogFile.#ctor(System.String)">
+            <summary>
+            一个参数构造方法。参数用以初始化日志文件（部分）名称
+            </summary>
+            <param name="name">日志文件（部分）名称</param>
+        </member>
+        <member name="M:Sunny.UI.LogFile.#ctor(System.String,System.String)">
+            <summary>
+            两个参数构造方法。分别初始化日志文件（部分）名称和日志路径
+            </summary>
+            <param name="name">日志文件（部分）名称</param>
+            <param name="direct">日志文件相对路径</param>
+        </member>
+        <member name="M:Sunny.UI.LogFile.StartThread">
+            <summary>
+            开启线程
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.LogFile.StopThread">
+            <summary>
+            停止线程
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.LogFile.Dispose">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.LogFile.Debug(System.String[])">
+            <summary>
+            记录日志
+            </summary>
+            <param name="message">信息</param>
+        </member>
+        <member name="M:Sunny.UI.LogFile.Info(System.String[])">
+            <summary>
+            记录日志
+            </summary>
+            <param name="message">信息</param>
+        </member>
+        <member name="M:Sunny.UI.LogFile.Warn(System.String[])">
+            <summary>
+            记录日志
+            </summary>
+            <param name="message">信息</param>
+        </member>
+        <member name="M:Sunny.UI.LogFile.Error(System.String[])">
+            <summary>
+            记录日志
+            </summary>
+            <param name="message">信息</param>
+        </member>
+        <member name="M:Sunny.UI.LogFile.Fatal(System.String[])">
+            <summary>
+            记录日志
+            </summary>
+            <param name="message">信息</param>
+        </member>
+        <member name="M:Sunny.UI.LogFile.WarnException(System.Exception)">
+            <summary>
+            记录日志
+            </summary>
+            <param name="e">错误信息</param>
+        </member>
+        <member name="M:Sunny.UI.LogFile.ErrorException(System.Exception)">
+            <summary>
+            记录日志
+            </summary>
+            <param name="e">错误信息</param>
+        </member>
+        <member name="M:Sunny.UI.LogFile.FatalException(System.Exception)">
+            <summary>
+            记录日志
+            </summary>
+            <param name="e">错误信息</param>
+        </member>
+        <member name="T:Sunny.UI.LogLevel">
+            <summary>
+            日志级别（与NLog一致）
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.LogLevel.Trace">
+            <summary>
+            详细信息：通常用于内部调试目的。包含最详细的跟踪信息。
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.LogLevel.Debug">
+            <summary>
+            调试信息：通常用于记录程序运行时的详细流程信息。
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.LogLevel.Info">
+            <summary>
+            一般信息：通常用于记录应用程序的运行流程或业务逻辑处理情况，不包含敏感信息。
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.LogLevel.Warn">
+            <summary>
+            警告信息：表示可能发生的问题，但不一定影响应用程序的运行。
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.LogLevel.Error">
+            <summary>
+            错误信息：表示应用程序的某个部分发生了错误，但应用程序仍能继续运行。
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.LogLevel.Fatal">
+            <summary>
+            致命错误：表示应用程序遇到了无法恢复的错误，通常会导致应用程序的崩溃或停止运行。
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.LogLevel.Off">
+            <summary>
+            关闭日志记录：这是一个特殊的级别，用于关闭日志记录。
+            </summary>
+        </member>
+        <member name="T:Sunny.UI.ILogger">
+            <summary>
+            日志记录接口
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.ILogger.Level">
+            <summary>
+            日志级别
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.ILogger.Trace(System.Object[])">
+            <summary>
+            详细信息：通常用于内部调试目的。包含最详细的跟踪信息。
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.ILogger.Debug(System.Object[])">
+            <summary>
+            调试信息：通常用于记录程序运行时的详细流程信息。
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.ILogger.Info(System.Object[])">
+            <summary>
+            一般信息：通常用于记录应用程序的运行流程或业务逻辑处理情况，不包含敏感信息。
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.ILogger.Warn(System.Object[])">
+            <summary>
+            警告信息：表示可能发生的问题，但不一定影响应用程序的运行。
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.ILogger.Error(System.Object[])">
+            <summary>
+            错误信息：表示应用程序的某个部分发生了错误，但应用程序仍能继续运行。
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.ILogger.Fatal(System.Object[])">
+            <summary>
+            致命错误：表示应用程序遇到了无法恢复的错误，通常会导致应用程序的崩溃或停止运行。
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.ILogger.GenerateLog(Sunny.UI.LogLevel,System.Object[])">
+            <summary>
+            生成日志字符串
+            </summary>
+            <param name="level"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.UI.ILogger.WriteLog(System.String)">
+            <summary>
+            写入日志
+            </summary>
+            <param name="log"></param>
+        </member>
+        <member name="T:Sunny.UI.BaseLogger">
+            <summary>
+            日志记录基类
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.BaseLogger.Level">
+            <summary>
+            日志级别
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.BaseLogger.Trace(System.Object[])">
+            <summary>
+            详细信息：通常用于内部调试目的。包含最详细的跟踪信息。
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.BaseLogger.Debug(System.Object[])">
+            <summary>
+            调试信息：通常用于记录程序运行时的详细流程信息。
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.BaseLogger.Info(System.Object[])">
+            <summary>
+            一般信息：通常用于记录应用程序的运行流程或业务逻辑处理情况，不包含敏感信息。
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.BaseLogger.Warn(System.Object[])">
+            <summary>
+            警告信息：表示可能发生的问题，但不一定影响应用程序的运行。
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.BaseLogger.Error(System.Object[])">
+            <summary>
+            错误信息：表示应用程序的某个部分发生了错误，但应用程序仍能继续运行。
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.BaseLogger.Fatal(System.Object[])">
+            <summary>
+            致命错误：表示应用程序遇到了无法恢复的错误，通常会导致应用程序的崩溃或停止运行。
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.BaseLogger.GenerateLog(Sunny.UI.LogLevel,System.Object[])">
+            <summary>
+            生成日志字符串
+            </summary>
+            <param name="level">日志级别</param>
+            <param name="args">日志对象</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.BaseLogger.WriteLog(System.String)">
+            <summary>
+            写入日志
+            </summary>
+            <param name="log">日志</param>
+        </member>
+        <member name="M:Sunny.UI.BaseLogger.WriteLog(Sunny.UI.LogLevel,System.String)">
+            <summary>
+            写入日志
+            </summary>
+            <param name="level">日志级别</param>
+            <param name="log">日志</param>
+        </member>
+        <member name="T:Sunny.UI.ConsoleLogger">
+            <summary>
+            控制台日志记录
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.ConsoleLogger.#ctor(Sunny.UI.LogLevel)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.ConsoleLogger.Instance">
+            <summary>
+            默认实例
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.ConsoleLogger.WriteLog(System.String)">
+            <summary>
+            写入日志
+            </summary>
+            <param name="log">日志</param>
+        </member>
+        <member name="M:Sunny.UI.ConsoleLogger.WriteLog(Sunny.UI.LogLevel,System.String)">
+            <summary>
+            写入日志
+            </summary>
+            <param name="level">日志级别</param>
+            <param name="log">日志</param>
+        </member>
+        <member name="T:Sunny.UI.FileLogger">
+            <summary>
+            日志文件记录类
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.FileLogger.#ctor(System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="savePeriod">保存间隔，大于0时使用缓存保存，单位：ms</param>
+        </member>
+        <member name="M:Sunny.UI.FileLogger.#ctor(Sunny.UI.LogLevel,System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="level">日志级别</param>
+            <param name="savePeriod">保存间隔，大于0时使用缓存保存，单位：ms</param>
+        </member>
+        <member name="M:Sunny.UI.FileLogger.#ctor(System.String,System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="name">日志文件名称</param>
+            <param name="savePeriod">保存间隔，大于0时使用缓存保存，单位：ms</param>
+        </member>
+        <member name="M:Sunny.UI.FileLogger.#ctor(System.String,Sunny.UI.LogLevel,System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="name">日志文件名称</param>
+            <param name="level">日志级别</param>
+            <param name="savePeriod">保存间隔，大于0时使用缓存保存，单位：ms</param>
+        </member>
+        <member name="M:Sunny.UI.FileLogger.#ctor(System.String,System.String,Sunny.UI.LogLevel,System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="name">日志文件名称</param>
+            <param name="dir">日志文件夹名称</param>
+            <param name="level">日志级别</param>
+            <param name="savePeriod">保存间隔，大于0时使用缓存保存，单位：ms</param>
+        </member>
+        <member name="F:Sunny.UI.FileLogger._fileNamePrefix">
+            <summary>
+            文件名前缀
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.FileLogger.FilePath">
+            <summary>
+            获取或设置日志文件的路径
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.FileLogger.MaxFileSize">
+            <summary>
+            获取或设置定义日志文件大小
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.FileLogger.StartThread(System.Int32)">
+            <summary>
+            开启线程
+            </summary>
+        </member>
+        <member name="F:Sunny.UI.FileLogger._disposed">
+            <summary>
+            是否释放标志
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.FileLogger.IsDisposed">
+            <summary>
+            保证重复释放资源时，不重复释放
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.FileLogger.ThrowIfDisposed">
+            <summary>
+            判断是否已经被释放，如果是，则抛出异常。
+            </summary>
+            <exception cref="T:System.ObjectDisposedException"></exception>
+        </member>
+        <member name="M:Sunny.UI.FileLogger.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.FileLogger.Dispose(System.Boolean)">
+            <summary>
+            释放资源
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:Sunny.UI.FileLogger.WriteLog(System.String)">
+            <summary>
+            写入日志
+            </summary>
+            <param name="log">日志</param>
+        </member>
+        <member name="M:Sunny.UI.FileLogger.WriteAtOnce(System.String)">
+            <summary>
+            写入日志
+            </summary>
+            <param name="log">日志</param>
+        </member>
+        <member name="T:Sunny.UI.NullableDictionary`2">
+            <summary>
+            可空字典。获取数据时如果指定键不存在可返回空而不是抛出异常
+            </summary>
+            <typeparam name="TKey">The type of the t key.</typeparam>
+            <typeparam name="TValue">The type of the t value.</typeparam>
+            <seealso cref="T:System.Collections.Generic.Dictionary`2" />
+            <seealso cref="T:System.Collections.Generic.IDictionary`2" />
+        </member>
+        <member name="P:Sunny.UI.NullableDictionary`2.Item(`0)">
+            <summary>
+            获取或设置与指定的属性是否有脏数据。
+            </summary>
+            <param name="item">The item.</param>
+            <returns>TValue.</returns>
+        </member>
+        <member name="T:Sunny.UI.PCapReader">
+            <summary>
+            PCap文件读取类
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.PCapReader.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:Sunny.UI.PCapReader.ReadFile">
+            <summary>
+            读取文件
+            </summary>
+        </member>
+        <member name="E:Sunny.UI.PCapReader.OnData">
+            <summary>
+            数据帧到达事件
+            </summary>
+        </member>
+        <member name="T:Sunny.UI.OnPCapFrame">
+            <summary>
+            数据帧到达事件
+            </summary>
+            <param name="sender">对象</param>
+            <param name="data">数据</param>
+            <param name="allLength">总长度</param>
+            <param name="readPos">读取到达位置</param>
+        </member>
+        <member name="T:Sunny.UI.PerformanceTest">
+            <summary>
+            性能测试类
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.PerformanceTest.Run(System.Action,System.UInt32,System.Boolean)">
+            <summary>
+            运行性能测试
+            </summary>
+            <param name="action">待测试方法</param>
+            <param name="repeat">运行次数</param>
+            <param name="justRun">直接运行，不测试时间</param>
+            <returns>平均运行时间</returns>
+        </member>
+        <member name="T:Sunny.UI.RSA">
+            <summary>
+            RSA算法实现（公钥加密私钥解密，私钥加密公钥解密）
+            密钥长度为1024，加密数据长度不限制
+            https://www.cnblogs.com/kuaileguaiwu/archive/2009/04/21/1440471.html
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.RSA.EncryptByPublicKey(System.String,System.String)">
+            <summary>
+            通过公钥加密
+            </summary>
+            <param name="content">待加密字符串</param>
+            <param name="xmlPublicKey">公钥</param>
+            <returns>加密结果</returns>
+        </member>
+        <member name="M:Sunny.UI.RSA.EncryptByPublicKey(System.String,System.String,System.String)">
+            <summary>
+            通过公钥加密
+            </summary>
+            <param name="dataStr">待加密字符串</param>
+            <param name="n">大整数n</param>
+            <param name="e">公钥</param>
+            <returns>加密结果</returns>
+        </member>
+        <member name="M:Sunny.UI.RSA.DecryptByPrivateKey(System.Byte[],System.String)">
+            <summary>
+            通过私钥解密modPow
+            
+            </summary>
+            <param name="content">待解密字符数组</param>
+            <param name="xmlPrivateKey">私钥</param>
+            <returns>解密结果</returns>
+        </member>
+        <member name="M:Sunny.UI.RSA.DecryptByPrivateKey(System.Byte[],System.String,System.String)">
+            <summary>
+            通过私钥解密
+            </summary>
+            <param name="content">待解密字符数组</param>
+            <param name="n">大整数n</param>
+            <param name="d">私钥</param>
+            <returns>解密结果</returns>
+        </member>
+        <member name="M:Sunny.UI.RSA.EncryptByPrivateKey(System.String,System.String)">
+            <summary>
+            通过私钥加密
+            </summary>
+            <param name="content">待加密字符串</param>
+            <param name="xmlPrivateKey">私钥</param>
+            <returns>加密结果</returns>
+        </member>
+        <member name="M:Sunny.UI.RSA.DecryptByPublicKey(System.Byte[],System.String)">
+            <summary>
+            通过公钥解密
+            </summary>
+            <param name="content">待解密字符数组</param>
+            <param name="xmlPublicKey">公钥</param>
+            <returns>解密结果</returns>
+        </member>
+        <member name="M:Sunny.UI.RSA.EncryptString(System.String,Sunny.UI.BigInteger,Sunny.UI.BigInteger)">
+            <summary>
+            加密字符串
+            </summary>
+            <param name="dataStr">待加密字符串</param>
+            <param name="keyNum">密钥大素数</param>
+            <param name="nNum">大整数N</param>
+            <returns>加密结果</returns>
+        </member>
+        <member name="M:Sunny.UI.RSA.DecryptBytes(System.Byte[],Sunny.UI.BigInteger,Sunny.UI.BigInteger)">
+            <summary>
+            解密字符数组
+            </summary>
+            <param name="dataBytes">待解密字符数组</param>
+            <param name="KeyNum">密钥大素数</param>
+            <param name="nNum">大整数N</param>
+            <returns>解密结果</returns>
+        </member>
+        <member name="T:Sunny.UI.RSANative">
+            <summary>
+            RSA算法，C#自带的RSA算法类RSACryptoServiceProvider只支持公钥加密私钥解密，即数字证书的使用
+            密钥长度为384位到16384位，增量为8，加密数据长度为（密钥长度 / 8 - 11）
+            https://www.cnblogs.com/Laggage/p/11028614.html
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.RSANative.RSAEncrypt(System.String,System.String)">
+            <summary>
+            通过公钥加密
+            </summary>
+            <param name="content">待加密字符串</param>
+            <param name="xmlPublicKey">公钥</param>
+            <returns>加密结果</returns>
+        </member>
+        <member name="M:Sunny.UI.RSANative.RSADecrypt(System.String,System.String)">
+            <summary>
+            通过私钥解密
+            </summary>
+            <param name="content">待解密字符串</param>
+            <param name="xmlPrivateKey">私钥</param>
+            <returns>解密结果</returns>
+        </member>
+        <member name="T:Sunny.UI.RSASecretKey">
+            <summary>
+            公钥和私钥
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.RSASecretKey.#ctor(System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="privateKey">私钥</param>
+            <param name="publicKey">公钥</param>
+        </member>
+        <member name="P:Sunny.UI.RSASecretKey.PublicKey">
+            <summary>
+            公钥
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.RSASecretKey.PrivateKey">
+            <summary>
+            私钥
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.RSASecretKey.ToString">
+            <summary>
+            生成字符串
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.UI.RSASecretKey.GenerateSecretKey(System.Int32)">
+            <summary>
+            生成密钥对（XML格式）
+            密钥的大小，必须从384位到16384位，增量为8
+            </summary>
+            <param name="keySize">密钥长度</param>
+            <returns>密钥对</returns>
+        </member>
+        <member name="M:Sunny.UI.RSASecretKey.GetKey(System.String@,System.String@,System.String@)">
+            <summary>
+            生成密钥对
+            RSA密码由三个整数组成，我们分别称之为n, e, d
+            (n、d): 私钥，这个我们要私密保存
+            (n、e): 公钥，可以对外公布
+            </summary>
+            <param name="n">n: 模数(Modulus)，私钥和公钥都包含有这个数</param>
+            <param name="e">e: 公钥指数(publicExponent)，一般是固定值65537</param>
+            <param name="d">d：私钥指数(privateExponent)</param>
+        </member>
+        <member name="T:Sunny.UI.StringList">
+            <summary>
+            字符串列表
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.StringList.Count">
+            <summary>
+            数据个数属性
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.StringList.Text">
+            <summary>
+            显示文本
+            </summary>
+        </member>
+        <member name="P:Sunny.UI.StringList.Item(System.Int32)">
+            <summary>
+            读取某行内容
+            </summary>
+            <param name="index">序号</param>
+            <returns>结果</returns>
+        </member>
+        <member name="P:Sunny.UI.StringList.Strings">
+            <summary>
+            字符串数组
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.StringList.Add(System.String)">
+            <summary>
+            追加一行
+            </summary>
+            <param name="value">值</param>
+            <returns>序号</returns>
+        </member>
+        <member name="M:Sunny.UI.StringList.Insert(System.Int32,System.String)">
+            <summary>
+            插入一行
+            </summary>
+            <param name="index">序号</param>
+            <param name="value">值</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringList.IndexOf(System.String)">
+            <summary>
+            查找数据的位置
+            </summary>
+            <param name="value">值</param>
+            <returns>位置</returns>
+        </member>
+        <member name="M:Sunny.UI.StringList.Delete(System.Int32)">
+            <summary>
+            删除一行
+            </summary>
+            <param name="index">序号</param>
+        </member>
+        <member name="M:Sunny.UI.StringList.ToString">
+            <summary>
+            转换为字符串。
+            </summary>
+            <returns>结果</returns>
+        </member>
+        <member name="M:Sunny.UI.StringList.ToString(System.Int32,System.Int32)">
+            <summary>
+            转换为字符串。
+            </summary>
+            <param name="startIndex">开始序号</param>
+            <param name="count">长度</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Sunny.UI.StringList.Clear">
+            <summary>
+            清除内容
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.StringList.SaveToFile(System.String,System.Text.Encoding)">
+            <summary>
+            保存为一个文件
+            </summary>
+            <param name="fileName">文件名</param>
+            <param name="encoding">编码</param>
+        </member>
+        <member name="M:Sunny.UI.StringList.SaveToFile(System.String)">
+            <summary>
+            保存文件
+            </summary>
+            <param name="fileName">文件名</param>
+        </member>
+        <member name="M:Sunny.UI.StringList.LoadFromFile(System.String)">
+            <summary>
+            读入一个文本文件
+            </summary>
+            <param name="fileName">文件名</param>
+        </member>
+        <member name="M:Sunny.UI.StringList.LoadFromFile(System.String,System.Text.Encoding)">
+            <summary>
+            从文件载入
+            </summary>
+            <param name="fileName">文件名</param>
+            <param name="encoding">编码</param>
+        </member>
+        <member name="T:Sunny.UI.UITemplate">
+            <summary>
+            模版引擎
+            </summary>
+        </member>
+        <member name="M:Sunny.UI.UITemplate.#ctor(System.String)">
+            <summary>
+            模版引擎
+            </summary>
+            <param name="content"></param>
+        </member>
+        <member name="M:Sunny.UI.UITemplate.Set(System.String,System.String)">
+            <summary>
+            设置变量
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.UI.UITemplate.Render">
+            <summary>
+            渲染模板
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:System.NETool.ByteBits">
+            <summary>
+            表示byte的位集合
+            位索引(0 ~ 7)，为由低到高的位索引，最低位为0位
+            </summary>
+        </member>
+        <member name="F:System.NETool.ByteBits.Value">
+            <summary>
+            字节值
+            </summary>
+        </member>
+        <member name="P:System.NETool.ByteBits.MaxLength">
+            <summary>
+            位集合最大长度
+            </summary>
+        </member>
+        <member name="M:System.NETool.ByteBits.#ctor(System.Byte)">
+            <summary>
+            byte的位集合
+            </summary>
+            <param name="value">字节</param>
+        </member>
+        <member name="M:System.NETool.ByteBits.Take(System.Int32,System.Int32)">
+            <summary>
+            从指定索引位置取高位
+            </summary>
+            <param name="index">索引 (0 ~ 7)，由低到高的位索引，最低位为0位</param>
+            <param name="count">位的数量</param>
+            <returns></returns>
+        </member>
+        <member name="P:System.NETool.ByteBits.Item(System.Int32)">
+            <summary>
+            获取或设置指定位的值
+            </summary>
+            <param name="index">索引 (0 ~ 7)，由低到高的位索引，最低位为0位</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:System.NETool.ByteBits.ToString">
+            <summary>
+            字符串显示各个位的值
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:System.NETool.ByteBits.DisplayText">
+            <summary>
+            字符串显示各个位的值，四位用空格分隔显示
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.NETool.ByteBits.op_Implicit(System.Byte)~System.NETool.ByteBits">
+            <summary>
+            从byte类型隐式转换
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.NETool.ByteBits.op_Implicit(System.NETool.ByteBits)~System.Byte">
+            <summary>
+            隐式转换为byte类型
+            </summary>
+            <param name="bits"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.NETool.ByteBits.GetHashCode">
+            <summary>
+            获取哈希码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.NETool.ByteBits.Equals(System.Object)">
+            <summary>
+            比较是否和目标相等
+            </summary>
+            <param name="obj">目标</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.NETool.ByteBits.System#IComparable{System#NETool#ByteBits}#CompareTo(System.NETool.ByteBits)">
+            <summary>
+            比较
+            </summary>
+            <param name="other">目标</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.NETool.ByteBits.BitsByte(System.String)">
+            <summary>
+            字符串转Byte
+            </summary>
+        </member>
+        <member name="M:System.NETool.ByteBits.BitsString(System.Byte)">
+            <summary>
+            Byte转字符串
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

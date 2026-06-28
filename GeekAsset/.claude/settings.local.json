@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"C:/Users/Arvin/.claude/projects/C--Users-Arvin-source-repos-GeekAsset-GeekAsset/memory\")",
+      "Bash(cat MEMORY.md)",
+      "PowerShell(& \"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Community\\\\MSBuild\\\\Current\\\\Bin\\\\MSBuild.exe\" GeekAsset.csproj /p:Configuration=Debug /nologo /v:minimal /clp:ErrorsOnly)"
+    ]
+  }
+}

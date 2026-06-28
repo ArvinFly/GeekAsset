@@ -1,0 +1,44 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Arvin\\source\\repos\\GeekAsset\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E4D0A1D7-E406-4A93-864F-06CFC5905D5D}|GeekAsset\\GeekAsset.csproj|c:\\users\\arvin\\source\\repos\\geekasset\\geekasset\\mainfrm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E4D0A1D7-E406-4A93-864F-06CFC5905D5D}|GeekAsset\\GeekAsset.csproj|solutionrelative:geekasset\\mainfrm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainFrm.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\Arvin\\source\\repos\\GeekAsset\\GeekAsset\\MainFrm.cs",
+              "RelativeDocumentMoniker": "GeekAsset\\MainFrm.cs",
+              "ToolTip": "C:\\Users\\Arvin\\source\\repos\\GeekAsset\\GeekAsset\\MainFrm.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "GeekAsset\\MainFrm.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-27T16:26:31.958Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
